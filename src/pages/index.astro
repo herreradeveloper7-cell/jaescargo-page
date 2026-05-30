@@ -1,11 +1,369 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import {
+	ArrowRight,
+	ClipboardCheck,
+	Home,
+	Headphones,
+	PackageCheck,
+	Plane,
+	Search,
+	Send,
+	ShieldCheck,
+	ShoppingBag,
+	Truck,
+	UserRoundCheck,
+} from '@lucide/astro';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import CtaSection from '../components/CtaSection.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const containerClass = 'mx-auto w-full max-w-[1180px] px-6 max-[760px]:px-[18px]';
+const heroButtonBase =
+	'group relative inline-flex min-h-12 min-w-[158px] items-center justify-center gap-2.5 overflow-hidden rounded-lg px-[18px] py-3 font-heading text-[0.86rem] font-extrabold no-underline shadow-[0_14px_28px_rgba(139,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.18)] transition-[background,border-color,box-shadow,transform] duration-[180ms] before:absolute before:inset-0 before:-translate-x-[120%] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.36),transparent)] before:transition-transform before:duration-[420ms] hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(139,0,0,0.28),0_0_0_4px_rgba(139,0,0,0.08),0_0_24px_rgba(139,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.22)] hover:before:translate-x-[120%] max-[560px]:w-full';
+const heroButtonIconClass =
+	'relative z-10 shrink-0 transition-transform duration-[180ms] group-hover:translate-x-0.5 group-hover:-rotate-4';
+const featuredButtonBase =
+	'group relative mt-auto inline-flex min-h-11 min-w-[154px] items-center justify-center gap-2.5 overflow-hidden rounded-lg border border-primary bg-[linear-gradient(135deg,rgba(255,255,255,0.16),transparent_36%)] bg-primary px-4 py-2.5 text-[0.84rem] font-extrabold text-white no-underline shadow-[0_14px_28px_rgba(139,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.18)] transition-[box-shadow,transform] duration-[180ms] before:absolute before:inset-0 before:-translate-x-[120%] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.36),transparent)] before:transition-transform before:duration-[420ms] hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(139,0,0,0.28),0_0_0_4px_rgba(139,0,0,0.08),0_0_24px_rgba(139,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.22)] hover:before:translate-x-[120%] max-[560px]:w-full';
+const featuredCardBase =
+	'min-h-[252px] translate-y-8 rounded-lg border border-border bg-white px-6 py-6 text-center opacity-0 shadow-brand transition-[opacity,box-shadow,transform] duration-[850ms] ease-out [&.is-visible]:translate-y-0 [&.is-visible]:opacity-100 [&.is-visible]:animate-fade-in [&.is-visible]:animate-duration-[850ms] [&.is-visible]:animate-fill-mode-both [&.is-visible]:animate-bezier-quart-out hover:-translate-y-1.5 hover:shadow-[0_22px_46px_rgba(45,45,45,0.16),0_0_0_1px_rgba(139,0,0,0.08)] max-[560px]:min-h-0 max-[560px]:px-5';
+const featuredCardInnerClass =
+	'flex min-h-[204px] flex-col items-center animate-float animate-duration-[3800ms] animate-iteration-count-infinite animate-ease-in-out';
+const whyTitleClass =
+	'font-heading text-[1.05rem] font-extrabold leading-[1.25] text-secondary';
+const whyTextClass = 'mt-2.5 max-w-[25ch] text-[0.86rem] leading-[1.7] text-muted max-[560px]:mx-auto';
+const whyItemClass =
+	'group relative grid min-h-[172px] grid-cols-[56px_1fr] items-start gap-4 px-7 py-8 after:absolute after:top-8 after:right-0 after:h-[calc(100%-4rem)] after:w-px after:bg-border after:content-[\'\'] last:after:hidden transition-colors duration-200 hover:bg-surface/70 max-[1024px]:after:hidden max-[560px]:grid-cols-1 max-[560px]:px-6 max-[560px]:text-center';
+const whyIconClass =
+	'inline-flex h-14 w-14 items-center justify-center rounded-full border border-transparent bg-[linear-gradient(var(--color-white),var(--color-white))_padding-box,linear-gradient(135deg,var(--color-primary),var(--color-secondary))_border-box] text-primary shadow-[0_12px_26px_rgba(139,0,0,0.1)] transition-transform duration-200 group-hover:scale-105 max-[560px]:mx-auto';
+const processStepClass =
+	'relative flex translate-y-5 flex-col items-center text-center opacity-0 transition-[opacity,transform] duration-[800ms] ease-out [&.is-visible]:translate-y-0 [&.is-visible]:opacity-100 [&.is-visible]:animate-fade-in [&.is-visible]:animate-duration-[800ms] [&.is-visible]:animate-fill-mode-both [&.is-visible]:animate-bezier-quart-out';
+const processIconClass =
+	'relative z-10 inline-flex h-[74px] w-[74px] items-center justify-center rounded-full border border-white/10 bg-white text-primary shadow-[0_20px_42px_rgba(0,0,0,0.22)] transition-transform duration-200 hover:-translate-y-1';
+const processNumberClass =
+	'mt-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary font-heading text-sm font-extrabold text-white shadow-[0_10px_22px_rgba(139,0,0,0.28)]';
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="JAES Cargo | Casillero virtual, courier y exportaciones"
+	description="JAES Cargo conecta tus compras internacionales, envios courier, exportaciones y soluciones de correo especializado."
+>
+	<Header />
+	<main>
+		<section
+			class="min-h-[clamp(390px,42vw,560px)] bg-[linear-gradient(90deg,rgba(0,0,0,0.82)_0%,rgba(0,0,0,0.56)_42%,rgba(0,0,0,0.18)_100%),url('/images/hero-home.webp')] bg-cover bg-center py-[clamp(34px,5vw,62px)] text-white max-[860px]:min-h-[430px] max-[860px]:bg-[position:62%_center] max-[860px]:py-[42px] max-[560px]:min-h-[420px] max-[560px]:bg-[linear-gradient(90deg,rgba(0,0,0,0.84)_0%,rgba(0,0,0,0.66)_100%),url('/images/hero-home.webp')] max-[560px]:bg-[position:58%_center] max-[560px]:py-[38px]"
+		>
+			<div class={`${containerClass} flex min-h-[inherit] items-center`}>
+				<div class="max-w-[min(680px,58vw)] -translate-y-[34px] max-[860px]:max-w-[620px] max-[860px]:-translate-y-[22px] max-[560px]:max-w-full max-[560px]:-translate-y-2.5">
+					<span class="mb-2.5 inline-block font-heading text-[clamp(0.72rem,0.85vw,0.84rem)] font-extrabold uppercase tracking-[0.04em] text-primary">
+						Conectamos lo que te importa
+					</span>
+					<h1 class="max-w-[680px] font-heading text-[clamp(2rem,4vw,3.75rem)] leading-[1.02] text-white uppercase">
+						Tu carga segura, <span class="text-primary">rapida</span> y acompañada
+					</h1>
+					<p class="mt-3.5 max-w-[560px] text-[clamp(0.9rem,1vw,1rem)] leading-[1.7] text-white/90">
+						En Jaes Cargo conectamos tus compras y envios con soluciones logisticas confiables,
+						personalizadas y eficientes.
+					</p>
+					<div class="mt-[22px] flex flex-wrap gap-3 max-[560px]:gap-2.5">
+						<a
+							class={`${heroButtonBase} border border-primary bg-[linear-gradient(135deg,rgba(255,255,255,0.16),transparent_36%)] bg-primary text-white hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.2),transparent_38%)] hover:bg-primary`}
+							href="/#contacto"
+						>
+							<span class="relative z-10">Cotiza tu envio</span>
+							<Send class={heroButtonIconClass} size={19} stroke-width={2.4} aria-hidden="true" />
+						</a>
+						<a
+							class={`${heroButtonBase} border border-white/60 bg-white/5 text-white shadow-[0_14px_28px_rgba(45,45,45,0.22),inset_0_1px_0_rgba(255,255,255,0.16)] hover:border-white hover:bg-white/10 hover:shadow-[0_18px_34px_rgba(45,45,45,0.3),0_0_0_4px_rgba(255,255,255,0.08),inset_0_1px_0_rgba(255,255,255,0.22)]`}
+							href="https://wolfbox.app/login"
+						>
+							<span class="relative z-10">Rastrear paquete</span>
+							<Search class={heroButtonIconClass} size={19} stroke-width={2.4} aria-hidden="true" />
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section
+			class="relative z-[3] -mt-[126px] bg-[linear-gradient(to_bottom,transparent_0_126px,var(--color-surface)_126px_100%)] pb-[58px] max-[860px]:-mt-[74px] max-[860px]:bg-[linear-gradient(to_bottom,transparent_0_74px,var(--color-surface)_74px_100%)] max-[860px]:pb-[52px]"
+			aria-label="Servicios principales"
+		>
+			<div class={`${containerClass} grid grid-cols-3 gap-6 max-[860px]:grid-cols-1`} data-featured-services>
+				<article
+					class={featuredCardBase}
+					data-featured-card
+				>
+					<div class={featuredCardInnerClass}>
+					<div class="mb-3 inline-flex h-[54px] w-[54px] items-center justify-center rounded-full border border-border bg-surface text-primary">
+						<ShoppingBag size={30} stroke-width={2.2} aria-hidden="true" />
+					</div>
+					<h2 class="font-heading text-[clamp(1.18rem,1.55vw,1.42rem)] leading-[1.2] text-primary">
+						Personal Shopper
+					</h2>
+					<span class="my-3 block h-0.5 w-[min(170px,68%)] rounded-full bg-primary"></span>
+					<p class="mb-[18px] max-w-[260px] text-[0.92rem] leading-[1.5] text-secondary">
+						No tienes tarjeta de credito? Nosotros compramos por ti.
+					</p>
+					<a class={featuredButtonBase} href="/personal-shopper">
+						<span class="relative z-10">Informacion</span>
+						<ArrowRight class="relative z-10 transition-transform duration-[180ms] group-hover:translate-x-0.5" size={18} stroke-width={2.4} aria-hidden="true" />
+					</a>
+					</div>
+				</article>
+
+				<article
+					class={featuredCardBase}
+					data-featured-card
+				>
+					<div class={`${featuredCardInnerClass} animate-delay-[450ms]`}>
+					<div class="mb-3 inline-flex h-[54px] w-[54px] items-center justify-center rounded-full border border-border bg-surface text-primary">
+						<PackageCheck size={30} stroke-width={2.2} aria-hidden="true" />
+					</div>
+					<h2 class="font-heading text-[clamp(1.18rem,1.55vw,1.42rem)] leading-[1.2] text-primary">
+						Casillero Virtual
+					</h2>
+					<span class="my-3 block h-0.5 w-[min(170px,68%)] rounded-full bg-primary"></span>
+					<p class="mb-[18px] max-w-[260px] text-[0.92rem] leading-[1.5] text-secondary">
+						Recibe tus compras en USA, nosotros las traemos hasta casa.
+					</p>
+					<a class={featuredButtonBase} href="/servicios">
+						<span class="relative z-10">Informacion</span>
+						<ArrowRight class="relative z-10 transition-transform duration-[180ms] group-hover:translate-x-0.5" size={18} stroke-width={2.4} aria-hidden="true" />
+					</a>
+					</div>
+				</article>
+
+				<article
+					class={featuredCardBase}
+					data-featured-card
+				>
+					<div class={`${featuredCardInnerClass} animate-delay-[900ms]`}>
+					<div class="mb-3 inline-flex h-[54px] w-[54px] items-center justify-center rounded-full border border-border bg-surface text-primary">
+						<Plane size={30} stroke-width={2.2} aria-hidden="true" />
+					</div>
+					<h2 class="font-heading text-[clamp(1.18rem,1.55vw,1.42rem)] leading-[1.2] text-primary">
+						Exportaciones
+					</h2>
+					<span class="my-3 block h-0.5 w-[min(170px,68%)] rounded-full bg-primary"></span>
+					<p class="mb-[18px] max-w-[260px] text-[0.92rem] leading-[1.5] text-secondary">
+						Envia tus productos al mundo con respaldo profesional.
+					</p>
+					<a class={featuredButtonBase} href="/servicios">
+						<span class="relative z-10">Informacion</span>
+						<ArrowRight class="relative z-10 transition-transform duration-[180ms] group-hover:translate-x-0.5" size={18} stroke-width={2.4} aria-hidden="true" />
+					</a>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section class="bg-surface py-[50px] max-[760px]:py-16">
+			<div class={containerClass}>
+				<div class="flex flex-col items-center text-center">
+					<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-primary">
+						Tu confianza, nuestra prioridad
+					</span>
+					<h2 class="mt-2 max-w-[760px] font-heading text-[clamp(2rem,3.4vw,3.4rem)] font-bold leading-[1.08] text-secondary">
+						Por que elegir Jaes Cargo?
+					</h2>
+					<span class="mt-5 block h-[3px] w-[64px] rounded-full bg-primary"></span>
+				</div>
+
+				<div class="mt-14 overflow-hidden rounded-lg border border-border bg-white shadow-[0_24px_60px_rgba(45,45,45,0.08)]">
+					<div class="grid grid-cols-4 max-[1024px]:grid-cols-2 max-[560px]:grid-cols-1">
+					<article class={whyItemClass}>
+						<div class={whyIconClass}>
+							<ShieldCheck size={28} stroke-width={2.2} aria-hidden="true" />
+						</div>
+						<div>
+							<h3 class={whyTitleClass}>Confianza garantizada</h3>
+							<p class={whyTextClass}>Mas de 7 anos de experiencia brindando soluciones logisticas seguras.</p>
+						</div>
+					</article>
+
+					<article class={whyItemClass}>
+						<div class={whyIconClass}>
+							<Truck size={28} stroke-width={2.2} aria-hidden="true" />
+						</div>
+						<div>
+							<h3 class={whyTitleClass}>Envios rapidos y seguros</h3>
+							<p class={whyTextClass}>Trabajamos con aliados estrategicos para asegurar entregas eficientes.</p>
+						</div>
+					</article>
+
+					<article class={whyItemClass}>
+						<div class={whyIconClass}>
+							<UserRoundCheck size={28} stroke-width={2.2} aria-hidden="true" />
+						</div>
+						<div>
+							<h3 class={whyTitleClass}>Atencion personalizada</h3>
+							<p class={whyTextClass}>Te acompañamos en cada paso, resolviendo tus dudas de forma clara.</p>
+						</div>
+					</article>
+
+					<article class={whyItemClass}>
+						<div class={whyIconClass}>
+							<Headphones size={28} stroke-width={2.2} aria-hidden="true" />
+						</div>
+						<div>
+							<h3 class={whyTitleClass}>Acompañamiento total</h3>
+							<p class={whyTextClass}>Desde que compras hasta que recibes tu paquete, estamos contigo.</p>
+						</div>
+					</article>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section
+			class="bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.08)_0%,transparent_34%),linear-gradient(180deg,#555555_0%,#414141_42%,var(--color-secondary)_100%)] py-[92px] text-white max-[760px]:py-16"
+		>
+			<div class={containerClass}>
+				<div class="flex flex-col items-center text-center">
+					<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-primary">
+						Facil, rapido y transparente
+					</span>
+					<h2 class="mt-2 max-w-[760px] font-heading text-[clamp(2rem,3.2vw,3.2rem)] font-extrabold leading-[1.08] text-white">
+						Asi funciona nuestro proceso
+					</h2>
+					<span class="mt-5 block h-[3px] w-[64px] rounded-full bg-primary"></span>
+				</div>
+
+				<div
+					class="group/process relative mt-14 grid grid-cols-5 gap-8 max-[980px]:grid-cols-2 max-[560px]:grid-cols-1"
+					data-process-timeline
+				>
+					<div
+						class="absolute top-[37px] left-[10%] h-px w-[80%] origin-left scale-x-0 border-t border-dashed border-primary/60 transition-transform duration-[1100ms] ease-out group-[.is-visible]/process:scale-x-100 max-[980px]:hidden"
+						aria-hidden="true"
+					></div>
+					<article class={processStepClass} data-process-step>
+						<div class={processIconClass}>
+							<ShoppingBag size={34} stroke-width={2.1} aria-hidden="true" />
+						</div>
+						<span class={processNumberClass}>1</span>
+						<h3 class="mt-4 font-heading text-[1rem] font-extrabold leading-[1.25] text-white">
+							Compras o envias tu paquete
+						</h3>
+						<p class="mt-3 max-w-[20ch] text-[0.84rem] leading-[1.65] text-white/75">
+							Realizas tu compra o nos envias tu paquete para iniciar el proceso.
+						</p>
+					</article>
+
+					<article class={processStepClass} data-process-step>
+						<div class={processIconClass}>
+							<PackageCheck size={34} stroke-width={2.1} aria-hidden="true" />
+						</div>
+						<span class={processNumberClass}>2</span>
+						<h3 class="mt-4 font-heading text-[1rem] font-extrabold leading-[1.25] text-white">
+							Llega a nuestra bodega
+						</h3>
+						<p class="mt-3 max-w-[20ch] text-[0.84rem] leading-[1.65] text-white/75">
+							Recibimos tu paquete en nuestra direccion internacional.
+						</p>
+					</article>
+
+					<article class={processStepClass} data-process-step>
+						<div class={processIconClass}>
+							<ClipboardCheck size={34} stroke-width={2.1} aria-hidden="true" />
+						</div>
+						<span class={processNumberClass}>3</span>
+						<h3 class="mt-4 font-heading text-[1rem] font-extrabold leading-[1.25] text-white">
+							Validamos y procesamos
+						</h3>
+						<p class="mt-3 max-w-[20ch] text-[0.84rem] leading-[1.65] text-white/75">
+							Verificamos el paquete y lo preparamos para el envio.
+						</p>
+					</article>
+
+					<article class={processStepClass} data-process-step>
+						<div class={processIconClass}>
+							<Plane size={34} stroke-width={2.1} aria-hidden="true" />
+						</div>
+						<span class={processNumberClass}>4</span>
+						<h3 class="mt-4 font-heading text-[1rem] font-extrabold leading-[1.25] text-white">
+							Despachamos tu paquete
+						</h3>
+						<p class="mt-3 max-w-[20ch] text-[0.84rem] leading-[1.65] text-white/75">
+							Lo enviamos por la mejor ruta disponible hacia tu destino.
+						</p>
+					</article>
+
+					<article class={processStepClass} data-process-step>
+						<div class={processIconClass}>
+							<Home size={34} stroke-width={2.1} aria-hidden="true" />
+						</div>
+						<span class={processNumberClass}>5</span>
+						<h3 class="mt-4 font-heading text-[1rem] font-extrabold leading-[1.25] text-white">
+							Recibes en tu destino
+						</h3>
+						<p class="mt-3 max-w-[20ch] text-[0.84rem] leading-[1.65] text-white/75">
+							Recibe tu paquete en la puerta de tu casa.
+						</p>
+					</article>
+				</div>
+			</div>
+		</section>
+		<CtaSection />
+	</main>
 </Layout>
+
+<script>
+	const featuredServices = document.querySelector('[data-featured-services]');
+	const processTimeline = document.querySelector('[data-process-timeline]');
+
+	if (featuredServices) {
+		const featuredCards = Array.from(featuredServices.querySelectorAll('[data-featured-card]'));
+		const revealFeatured = () => {
+			featuredCards.forEach((card, index) => {
+				window.setTimeout(() => {
+					card.classList.add('is-visible');
+				}, 180 * index);
+			});
+		};
+
+		if (!('IntersectionObserver' in window)) {
+			revealFeatured();
+		} else {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						revealFeatured();
+						observer.disconnect();
+					}
+				},
+				{ threshold: 0.24, rootMargin: '0px 0px -10% 0px' },
+			);
+
+			observer.observe(featuredServices);
+		}
+	}
+
+	if (processTimeline) {
+		const processSteps = Array.from(processTimeline.querySelectorAll('[data-process-step]'));
+		const revealProcess = () => {
+			processTimeline.classList.add('is-visible');
+			processSteps.forEach((step, index) => {
+				window.setTimeout(() => {
+					step.classList.add('is-visible');
+				}, 180 * index);
+			});
+		};
+
+		if (!('IntersectionObserver' in window)) {
+			revealProcess();
+		} else {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						revealProcess();
+						observer.disconnect();
+					}
+				},
+				{ threshold: 0.28, rootMargin: '0px 0px -12% 0px' },
+			);
+
+			observer.observe(processTimeline);
+		}
+	}
+</script>

@@ -1,0 +1,48 @@
+---
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
+import CtaSection from '../components/CtaSection.astro';
+
+const containerClass = 'mx-auto w-full max-w-[1180px] px-6 max-[760px]:px-[18px]';
+---
+
+<Layout
+	title="Nosotros | JAES Cargo"
+	description="Conoce a JAES Cargo, aliado en casilleros internacionales, courier, exportaciones y correo especializado."
+>
+	<Header />
+	<main>
+		<section class="bg-[linear-gradient(90deg,rgba(45,45,45,0.9),rgba(139,0,0,0.82)),url('https://images.unsplash.com/photo-1494412685616-a5d310fbb07d?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center py-[108px] text-white">
+			<div class={containerClass}>
+				<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-white">
+					Nosotros
+				</span>
+				<h1 class="mt-3 max-w-[920px] font-heading text-[clamp(2.2rem,5vw,4.6rem)] leading-[1.08] text-white">
+					Somos un aliado logistico para personas y empresas que se mueven entre mercados.
+				</h1>
+				<p class="mt-[22px] max-w-[720px] text-[1.08rem] leading-[1.7] text-white/85">
+					JAES Cargo nace para simplificar el acceso a soluciones internacionales de casillero,
+					courier, exportaciones y correo especializado, con atencion cercana y procesos ordenados.
+				</p>
+			</div>
+		</section>
+
+		<section class="bg-surface py-[88px] max-[760px]:py-16">
+			<div class={`${containerClass} grid grid-cols-3 gap-[18px] max-[820px]:grid-cols-1`}>
+				<article class="rounded-lg border border-border bg-white p-[30px]">
+					<h2 class="mb-3 font-heading text-[1.35rem] text-secondary">Claridad</h2>
+					<p class="leading-[1.7] text-muted">Procesos entendibles, comunicacion oportuna y seguimiento para cada operacion.</p>
+				</article>
+				<article class="rounded-lg border border-border bg-white p-[30px]">
+					<h2 class="mb-3 font-heading text-[1.35rem] text-secondary">Respaldo</h2>
+					<p class="leading-[1.7] text-muted">Gestion enfocada en cuidar tus compras, paquetes, documentos y exportaciones.</p>
+				</article>
+				<article class="rounded-lg border border-border bg-white p-[30px]">
+					<h2 class="mb-3 font-heading text-[1.35rem] text-secondary">Cercania</h2>
+					<p class="leading-[1.7] text-muted">Atencion humana para resolver dudas y acompanarte antes, durante y despues del envio.</p>
+				</article>
+			</div>
+		</section>
+		<CtaSection />
+	</main>
+</Layout>

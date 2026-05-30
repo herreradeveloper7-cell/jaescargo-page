@@ -1,0 +1,99 @@
+---
+import { Mail, MapPin, Phone, Send } from '@lucide/astro';
+
+const currentYear = new Date().getFullYear();
+
+const containerClass = 'mx-auto w-full max-w-[1180px] px-6 max-[760px]:px-[18px]';
+const footerLinkClass =
+	'inline-flex w-fit text-[0.92rem] font-semibold text-white/78 no-underline transition-colors duration-200 hover:text-white';
+const iconWrapClass =
+	'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]';
+---
+
+<footer class="relative overflow-hidden bg-[linear-gradient(180deg,var(--color-primary)_0%,#760000_46%,var(--color-primary-dark)_100%)] text-white">
+	<div class="absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(255,255,255,0.18),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.1),transparent_28%)]" aria-hidden="true"></div>
+	<div class="absolute inset-x-0 top-0 h-px bg-white/25" aria-hidden="true"></div>
+
+	<div class={`${containerClass} relative z-10 py-14 max-[760px]:py-11`}>
+		<div class="grid grid-cols-[1.25fr_0.75fr_0.85fr_1fr] gap-10 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1 max-[640px]:gap-8">
+			<div>
+				<a class="inline-flex w-fit items-center no-underline" href="/" aria-label="JAES Cargo inicio">
+					<img
+						class="h-auto w-[178px] max-w-full"
+						src="/images/logo-vertical-blanco.webp"
+						alt="JAES Cargo Internacional"
+						loading="lazy"
+					/>
+				</a>
+				<p class="mt-5 max-w-[340px] text-[0.92rem] leading-[1.75] text-white/78">
+					Soluciones de casillero virtual, courier, exportaciones y correo especializado
+					con acompanamiento claro en cada envio.
+				</p>
+			</div>
+
+			<nav aria-label="Navegacion del footer">
+				<h2 class="font-heading text-[1rem] font-extrabold text-white">Navegacion</h2>
+				<div class="mt-5 flex flex-col gap-3">
+					<a class={footerLinkClass} href="/">Inicio</a>
+					<a class={footerLinkClass} href="/servicios">Servicios</a>
+					<a class={footerLinkClass} href="/#como-funciona">Como funciona</a>
+					<a class={footerLinkClass} href="/nosotros">Nosotros</a>
+				</div>
+			</nav>
+
+			<nav aria-label="Servicios del footer">
+				<h2 class="font-heading text-[1rem] font-extrabold text-white">Servicios</h2>
+				<div class="mt-5 flex flex-col gap-3">
+					<a class={footerLinkClass} href="/servicios">Casillero virtual</a>
+					<a class={footerLinkClass} href="/personal-shopper">Personal shopper</a>
+					<a class={footerLinkClass} href="/servicios">Exportaciones</a>
+					<a class={footerLinkClass} href="https://wolfbox.app/register">Crear casillero</a>
+				</div>
+			</nav>
+
+			<div>
+				<h2 class="font-heading text-[1rem] font-extrabold text-white">Contacto</h2>
+				<div class="mt-5 flex flex-col gap-4">
+					<a class="group grid grid-cols-[40px_1fr] items-center gap-3 text-white no-underline" href="https://wa.me/?text=Hola%20JAES%20Cargo%2C%20quiero%20mas%20informacion" target="_blank" rel="noreferrer">
+						<span class={iconWrapClass}>
+							<Phone size={19} stroke-width={2.2} aria-hidden="true" />
+						</span>
+						<span class="text-[0.92rem] font-semibold text-white/78 transition-colors duration-200 group-hover:text-white">
+							Contactanos por WhatsApp
+						</span>
+					</a>
+					<a class="group grid grid-cols-[40px_1fr] items-center gap-3 text-white no-underline" href="mailto:info@jaescargo.com">
+						<span class={iconWrapClass}>
+							<Mail size={19} stroke-width={2.2} aria-hidden="true" />
+						</span>
+						<span class="text-[0.92rem] font-semibold text-white/78 transition-colors duration-200 group-hover:text-white">
+							info@jaescargo.com
+						</span>
+					</a>
+					<div class="grid grid-cols-[40px_1fr] items-center gap-3">
+						<span class={iconWrapClass}>
+							<MapPin size={19} stroke-width={2.2} aria-hidden="true" />
+						</span>
+						<span class="text-[0.92rem] font-semibold text-white/78">
+							AV CRA 80 # 2-51/
+							Bodega 41 - Local 11 - 2do Piso
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mt-11 flex items-center justify-between gap-5 border-t border-white/16 pt-6 max-[640px]:flex-col max-[640px]:items-start">
+			<p class="text-[0.84rem] font-semibold text-white/68">
+				© {currentYear} JAES Cargo Internacional. Todos los derechos reservados.
+			</p>
+			<a
+				class="group inline-flex items-center gap-2 rounded-lg border border-white/18 bg-white/10 px-4 py-2.5 font-heading text-[0.82rem] font-extrabold text-white no-underline transition-[background,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/14"
+				href="/#contacto"
+			>
+				Cotizar envio
+				<Send class="transition-transform duration-200 group-hover:translate-x-0.5" size={17} stroke-width={2.3} aria-hidden="true" />
+			</a>
+		</div>
+	</div>
+</footer>

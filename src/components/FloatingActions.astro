@@ -1,0 +1,94 @@
+---
+import { ArrowUp, Camera, MessageCircle, Phone, X } from '@lucide/astro';
+
+const whatsappUrl =
+	'https://wa.me/?text=Hola%20JAES%20Cargo%2C%20quiero%20mas%20informacion';
+const instagramUrl = 'https://www.instagram.com/jaescargo/';
+
+const floatButtonClass =
+	'inline-flex h-[54px] w-[54px] cursor-pointer items-center justify-center rounded-full border border-transparent text-white no-underline shadow-[0_16px_34px_rgba(45,45,45,0.18)] transition-[background,box-shadow,transform,opacity] duration-[180ms] hover:-translate-y-0.5 hover:shadow-[0_18px_38px_rgba(45,45,45,0.24)] max-[620px]:h-[50px] max-[620px]:w-[50px]';
+const quickActionClass =
+	`${floatButtonClass} translate-x-2.5 scale-[0.88] opacity-0 group-[.is-open]/floating:translate-x-0 group-[.is-open]/floating:scale-100 group-[.is-open]/floating:opacity-100`;
+---
+
+<div
+	class="group/floating fixed right-6 bottom-6 z-40 flex flex-col items-end gap-2.5 max-[620px]:right-[18px] max-[620px]:bottom-[18px]"
+	data-floating-actions
+>
+	<button
+		class={`${floatButtonClass} translate-y-2 scale-[0.92] border-white/10 bg-secondary opacity-0 pointer-events-none group-[.is-scrolled]/floating:pointer-events-auto group-[.is-scrolled]/floating:translate-y-0 group-[.is-scrolled]/floating:scale-100 group-[.is-scrolled]/floating:opacity-100`}
+		type="button"
+		aria-label="Volver arriba"
+		data-scroll-top
+	>
+		<ArrowUp size={22} stroke-width={2.4} aria-hidden="true" />
+	</button>
+
+	<div
+		class="pointer-events-none absolute right-16 bottom-0 flex items-end gap-2 group-[.is-open]/floating:pointer-events-auto"
+		data-quick-actions
+	>
+		<a
+			class={`${quickActionClass} border-primary/20 bg-primary delay-[40ms]`}
+			href={whatsappUrl}
+			target="_blank"
+			rel="noreferrer"
+			aria-label="Contactar por WhatsApp"
+		>
+			<MessageCircle size={22} stroke-width={2.4} aria-hidden="true" />
+		</a>
+		<a
+			class={`${quickActionClass} border-secondary/20 bg-secondary delay-[80ms]`}
+			href={instagramUrl}
+			target="_blank"
+			rel="noreferrer"
+			aria-label="Abrir Instagram"
+		>
+			<Camera size={22} stroke-width={2.4} aria-hidden="true" />
+		</a>
+	</div>
+
+	<button
+		class={`${floatButtonClass} relative border-white/15 bg-primary`}
+		type="button"
+		aria-label="Abrir acciones rapidas"
+		aria-expanded="false"
+		data-actions-toggle
+	>
+		<Phone
+			class="opacity-100 transition-[opacity,transform] duration-[180ms] group-[.is-open]/floating:rotate-45 group-[.is-open]/floating:scale-[0.72] group-[.is-open]/floating:opacity-0"
+			size={22}
+			stroke-width={2.4}
+			aria-hidden="true"
+		/>
+		<X
+			class="absolute scale-[0.72] -rotate-45 opacity-0 transition-[opacity,transform] duration-[180ms] group-[.is-open]/floating:scale-100 group-[.is-open]/floating:rotate-0 group-[.is-open]/floating:opacity-100"
+			size={24}
+			stroke-width={2.4}
+			aria-hidden="true"
+		/>
+	</button>
+</div>
+
+<script>
+const actionsRoot = document.querySelector('[data-floating-actions]');
+const actionsToggle = document.querySelector('[data-actions-toggle]');
+const scrollTopButton = document.querySelector('[data-scroll-top]');
+
+const updateScrollTopVisibility = () => {
+	const isScrolled = window.scrollY > 180;
+	actionsRoot?.classList.toggle('is-scrolled', isScrolled);
+};
+
+actionsToggle?.addEventListener('click', () => {
+	const isOpen = actionsRoot?.classList.toggle('is-open') ?? false;
+	actionsToggle.setAttribute('aria-expanded', String(isOpen));
+});
+
+scrollTopButton?.addEventListener('click', () => {
+	window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+updateScrollTopVisibility();
+window.addEventListener('scroll', updateScrollTopVisibility, { passive: true });
+</script>

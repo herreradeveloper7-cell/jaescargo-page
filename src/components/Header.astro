@@ -1,0 +1,60 @@
+---
+import { PackagePlus } from '@lucide/astro';
+
+const registerUrl = 'https://wolfbox.app/register';
+
+const navItems = [
+	{ label: 'Inicio', href: '/' },
+	{ label: 'Servicios', href: '/servicios' },
+	{ label: 'Como funciona', href: '/personal-shopper' },
+	{ label: 'Nosotros', href: '/nosotros' },
+	{ label: 'Ayuda', href: '/#ayuda' },
+	{ label: 'Contacto', href: '/#contacto' },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const isActive = (href: string) => {
+	if (href.includes('#')) return false;
+	const path = href.split('#')[0].replace(/\/$/, '') || '/';
+	return currentPath === path;
+};
+
+const containerClass = 'mx-auto w-full max-w-[1180px] px-6 max-[760px]:px-[18px]';
+const navLinkClass =
+	"relative inline-flex min-h-12 items-center whitespace-nowrap px-0.5 font-heading text-[clamp(0.86rem,0.9vw,0.96rem)] font-bold text-secondary no-underline transition-[color,transform] duration-[180ms] after:absolute after:bottom-1 after:left-1/2 after:h-0.5 after:w-full after:-translate-x-1/2 after:scale-x-0 after:rounded-full after:bg-primary after:transition-transform after:duration-[220ms] hover:-translate-y-px hover:text-primary hover:after:scale-x-100";
+const navLinkActiveClass = 'text-primary after:scale-x-100';
+---
+
+<header class="sticky top-0 z-20 border-b border-border bg-white shadow-[0_14px_36px_rgba(45,45,45,0.08)]">
+	<div
+		class={`${containerClass} grid min-h-[104px] grid-cols-[max-content_minmax(0,1fr)_max-content] items-center gap-[clamp(24px,3vw,44px)] max-[980px]:min-h-0 max-[980px]:grid-cols-[max-content_max-content] max-[980px]:justify-between max-[980px]:gap-[18px] max-[980px]:py-[18px] max-[620px]:grid-cols-1`}
+	>
+		<a class="inline-flex w-fit items-center justify-self-start leading-none no-underline" href="/" aria-label="JAES Cargo inicio">
+			<img class="h-[82px] w-auto object-contain max-[620px]:h-[66px]" src="/images/logo-horizontal-red.webp" alt="JAES Cargo" width="190" height="82" />
+		</a>
+
+		<nav
+			class="flex min-w-0 items-center justify-center gap-[clamp(16px,2vw,32px)] max-[980px]:col-span-full max-[980px]:row-start-2 max-[980px]:justify-start max-[980px]:overflow-x-auto max-[980px]:pb-2"
+			aria-label="Navegacion principal"
+		>
+			{
+				navItems.map((item) => (
+					<a class:list={[navLinkClass, { [navLinkActiveClass]: isActive(item.href) }]} href={item.href}>
+						{item.label}
+					</a>
+				))
+			}
+		</nav>
+
+		<div class="flex items-center justify-end max-[620px]:justify-start">
+			<a
+				class="group relative inline-flex min-h-[54px] items-center justify-center gap-2.5 overflow-hidden whitespace-nowrap rounded-md border border-primary bg-[linear-gradient(135deg,rgba(255,255,255,0.16),transparent_36%)] bg-primary px-[26px] py-3.5 font-heading text-[0.9rem] font-bold text-white no-underline shadow-[0_14px_28px_rgba(139,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.18)] transition-[border-color,box-shadow,transform] duration-[180ms] before:absolute before:inset-0 before:-translate-x-[120%] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.36),transparent)] before:transition-transform before:duration-[420ms] hover:-translate-y-0.5 hover:border-primary hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.2),transparent_38%)] hover:bg-primary hover:shadow-[0_18px_34px_rgba(139,0,0,0.28),0_0_0_4px_rgba(139,0,0,0.08),0_0_24px_rgba(139,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.22)] hover:before:translate-x-[120%] max-[620px]:w-full"
+				href={registerUrl}
+			>
+				<span class="relative z-10">Crear casillero</span>
+				<PackagePlus class="relative z-10 shrink-0 transition-transform duration-[180ms] group-hover:translate-x-0.5 group-hover:-rotate-4" size={19} stroke-width={2.4} aria-hidden="true" />
+			</a>
+		</div>
+	</div>
+</header>

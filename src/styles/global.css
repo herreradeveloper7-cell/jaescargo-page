@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import "tailwind-animations";
+
+@theme {
+	--color-primary: #8b0000;
+	--color-primary-dark: #640000;
+	--color-secondary: #2d2d2d;
+	--color-white: #ffffff;
+	--color-muted: #6f6f6f;
+	--color-surface: #f7f4f2;
+	--color-border: #e6ded9;
+	--font-heading: "Montserrat", Arial, sans-serif;
+	--font-body: "Open Sans", Arial, sans-serif;
+	--shadow-brand: 0 18px 45px rgba(45, 45, 45, 0.12);
+}

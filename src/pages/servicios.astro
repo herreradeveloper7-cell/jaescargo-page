@@ -1,0 +1,58 @@
+---
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
+import CtaSection from '../components/CtaSection.astro';
+
+const containerClass = 'mx-auto w-full max-w-[1180px] px-6 max-[760px]:px-[18px]';
+const buttonPrimary =
+	'inline-flex min-h-[46px] items-center justify-center rounded-md border border-primary bg-primary px-[18px] py-3 font-heading text-[0.9rem] font-bold text-white no-underline transition-[background,border-color,color,transform] duration-[180ms] hover:-translate-y-px hover:bg-primary-dark';
+const buttonOutline =
+	'inline-flex min-h-[46px] items-center justify-center rounded-md border border-border bg-white px-[18px] py-3 font-heading text-[0.9rem] font-bold text-secondary no-underline transition-[background,border-color,color,transform] duration-[180ms] hover:-translate-y-px hover:border-primary hover:text-primary';
+---
+
+<Layout
+	title="Servicios | JAES Cargo"
+	description="Casillero virtual, courier, exportaciones y correo especializado con JAES Cargo."
+>
+	<Header />
+	<main>
+		<section class="bg-surface py-[88px] pb-[72px]">
+			<div class={containerClass}>
+				<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-primary">
+					Servicios
+				</span>
+				<h1 class="mt-3 max-w-[860px] font-heading text-[clamp(2.2rem,5vw,4.5rem)] leading-[1.08] text-secondary">
+					Casillero virtual y exportaciones con una operacion clara de inicio a fin.
+				</h1>
+				<p class="mt-[18px] max-w-[680px] text-[1.04rem] leading-[1.7] text-muted">
+					Centralizamos soluciones para traer compras, mover paquetes y acompanar envios
+					internacionales con procesos organizados.
+				</p>
+			</div>
+		</section>
+
+		<section class="py-[88px] max-[760px]:py-16">
+			<div class={`${containerClass} grid grid-cols-2 gap-[22px] max-[760px]:grid-cols-1`}>
+				<article class="rounded-lg border border-border p-[34px]">
+					<span class="font-heading font-extrabold text-primary">01</span>
+					<h2 class="mt-3.5 font-heading text-[1.8rem] text-secondary">Casillero virtual</h2>
+					<p class="my-4 mb-7 leading-[1.7] text-muted">
+						Recibe tus compras internacionales en una direccion asignada, consolida paquetes y
+						gestiona el envio hacia tu destino con seguimiento.
+					</p>
+					<a class={buttonPrimary} href="https://wolfbox.app/register">Crear casillero</a>
+				</article>
+				<article class="rounded-lg border border-border p-[34px]">
+					<span class="font-heading font-extrabold text-primary">02</span>
+					<h2 class="mt-3.5 font-heading text-[1.8rem] text-secondary">Exportaciones</h2>
+					<p class="my-4 mb-7 leading-[1.7] text-muted">
+						Acompanamos a empresas y emprendedores en el envio de productos al exterior, cuidando
+						documentacion, tiempos y coordinacion logistica.
+					</p>
+					<a class={buttonOutline} href="/">Solicitar informacion</a>
+				</article>
+			</div>
+		</section>
+		<CtaSection />
+	</main>
+</Layout>
