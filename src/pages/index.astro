@@ -19,7 +19,7 @@ import CtaSection from '../components/CtaSection.astro';
 
 const containerClass = 'mx-auto w-full max-w-[1180px] px-6 max-[760px]:px-[18px]';
 const heroButtonBase =
-	'group relative inline-flex min-h-12 min-w-[158px] items-center justify-center gap-2.5 overflow-hidden rounded-lg px-[18px] py-3 font-heading text-[0.86rem] font-extrabold no-underline transition-[border-color,box-shadow,transform] duration-[180ms] before:absolute before:inset-0 before:-translate-x-[120%] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.28),transparent)] before:transition-transform before:duration-[420ms] hover:-translate-y-0.5 hover:before:translate-x-[120%] max-[560px]:w-full';
+	'group relative inline-flex min-h-12 min-w-[158px] items-center justify-center gap-2.5 overflow-hidden rounded-lg px-[18px] py-3 font-heading text-[0.86rem] font-extrabold no-underline transition-[border-color,box-shadow,transform] duration-[180ms] before:absolute before:inset-0 before:-translate-x-[120%] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.28),transparent)] before:transition-transform before:duration-[420ms] hover:-translate-y-0.5 hover:before:translate-x-[120%] max-[560px]:min-h-11 max-[560px]:min-w-0 max-[560px]:px-4 max-[560px]:py-2.5 max-[560px]:text-[0.8rem]';
 const heroButtonIconClass =
 	'relative z-10 shrink-0 transition-transform duration-[180ms] group-hover:translate-x-0.5 group-hover:-rotate-4';
 const featuredButtonBase =
@@ -36,7 +36,7 @@ const whyItemClass =
 const whyIconClass =
 	'inline-flex h-14 w-14 items-center justify-center rounded-full border border-transparent bg-[linear-gradient(var(--color-white),var(--color-white))_padding-box,linear-gradient(135deg,var(--color-primary),var(--color-secondary))_border-box] text-primary shadow-[0_12px_26px_rgba(139,0,0,0.1)] transition-transform duration-200 group-hover:scale-105 max-[560px]:mx-auto';
 const processStepClass =
-	'relative flex translate-y-5 flex-col items-center text-center opacity-0 transition-[opacity,transform] duration-[800ms] ease-out [&.is-visible]:translate-y-0 [&.is-visible]:opacity-100 [&.is-visible]:animate-fade-in [&.is-visible]:animate-duration-[800ms] [&.is-visible]:animate-fill-mode-both [&.is-visible]:animate-bezier-quart-out';
+	'relative z-10 flex translate-y-5 flex-col items-center text-center opacity-0 transition-[opacity,transform] duration-[800ms] ease-out [&.is-visible]:translate-y-0 [&.is-visible]:opacity-100 [&.is-visible]:animate-fade-in [&.is-visible]:animate-duration-[800ms] [&.is-visible]:animate-fill-mode-both [&.is-visible]:animate-bezier-quart-out';
 const processIconClass =
 	'relative z-10 inline-flex h-[74px] w-[74px] items-center justify-center rounded-full border border-white/70 bg-white text-primary shadow-[0_20px_42px_rgba(45,45,45,0.18)] transition-transform duration-200 hover:-translate-y-1';
 const processNumberClass =
@@ -50,21 +50,21 @@ const processNumberClass =
 	<Header />
 	<main>
 		<section
-			class="min-h-[clamp(390px,42vw,560px)] bg-[url('/images/img-hero1.webp')] bg-cover bg-center py-[clamp(34px,5vw,62px)] text-secondary max-[860px]:min-h-[430px] max-[860px]:bg-[position:62%_center] max-[860px]:py-[42px] max-[560px]:min-h-[420px] max-[560px]:bg-[url('/images/hero-home.webp')] max-[560px]:bg-[position:58%_center] max-[560px]:py-[38px]"
+			class="min-h-[clamp(390px,42vw,560px)] bg-[url('/images/img-hero1.webp')] bg-cover bg-center py-[clamp(34px,5vw,62px)] text-secondary max-[860px]:min-h-[430px] max-[860px]:bg-[position:62%_center] max-[860px]:py-[42px] max-[560px]:min-h-[560px] max-[560px]:bg-[position:70%_center] max-[560px]:py-[34px]"
 		>
 			<div class={`${containerClass} flex min-h-[inherit] items-center`}>
-				<div class="max-w-[min(680px,58vw)] -translate-y-[34px] max-[860px]:max-w-[620px] max-[860px]:-translate-y-[22px] max-[560px]:max-w-full max-[560px]:-translate-y-2.5">
-					<span class="mb-2.5 inline-block font-heading text-[clamp(0.72rem,0.85vw,0.84rem)] font-extrabold uppercase tracking-[0.04em] text-primary">
+				<div class="max-w-[min(680px,58vw)] -translate-y-[34px] max-[860px]:max-w-[620px] max-[860px]:-translate-y-[22px] max-[560px]:max-w-[88%] max-[560px]:-translate-y-[82px]">
+					<span class="mb-2.5 inline-block font-heading text-[clamp(0.72rem,0.85vw,0.84rem)] font-extrabold uppercase tracking-[0.04em] text-primary max-[560px]:mb-2 max-[560px]:text-[0.66rem]">
 						Conectamos lo que te importa
 					</span>
-					<h1 class="max-w-[640px] font-heading text-[clamp(1.9rem,3.25vw,3.2rem)] font-extrabold leading-[1.04] text-secondary uppercase">
+					<h1 class="max-w-[640px] font-heading text-[clamp(1.9rem,3.25vw,3.2rem)] font-extrabold leading-[1.04] text-secondary uppercase max-[560px]:max-w-[340px] max-[560px]:text-[2rem] max-[560px]:leading-[1.05]">
 						Tu carga segura, <span class="text-primary">rapida</span> y acompañada
 					</h1>
-					<p class="mt-3.5 max-w-[560px] text-[clamp(0.9rem,1vw,1rem)] leading-[1.7] text-secondary">
+					<p class="mt-3.5 max-w-[560px] text-[clamp(0.9rem,1vw,1rem)] leading-[1.7] text-secondary max-[560px]:mt-3 max-[560px]:max-w-[310px] max-[560px]:text-[0.86rem] max-[560px]:leading-[1.55]">
 						En Jaes Cargo conectamos tus compras y envios con soluciones logisticas confiables,
 						personalizadas y eficientes.
 					</p>
-					<div class="mt-[22px] flex flex-wrap gap-3 max-[560px]:gap-2.5">
+					<div class="mt-[22px] flex flex-wrap gap-3 max-[560px]:mt-4 max-[560px]:grid max-[560px]:max-w-[310px] max-[560px]:grid-cols-1 max-[560px]:gap-2.5">
 						<a
 							class={`${heroButtonBase} border border-primary bg-[linear-gradient(135deg,rgba(255,255,255,0.14),transparent_34%)] bg-primary text-white shadow-[0_14px_28px_rgba(139,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.18)] hover:border-primary hover:shadow-[0_18px_34px_rgba(139,0,0,0.24),0_0_0_4px_rgba(139,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.22)]`}
 							href="#cotizador"
@@ -235,6 +235,10 @@ const processNumberClass =
 				>
 					<div
 						class="absolute top-[37px] left-[10%] h-px w-[80%] origin-left scale-x-0 border-t border-dashed border-white/45 transition-transform duration-[1100ms] ease-out group-[.is-visible]/process:scale-x-100 max-[980px]:hidden"
+						aria-hidden="true"
+					></div>
+					<div
+						class="absolute left-1/2 top-[37px] bottom-[96px] hidden w-px -translate-x-1/2 origin-top scale-y-0 border-l border-dashed border-white/45 transition-transform duration-[1200ms] ease-out group-[.is-visible]/process:scale-y-100 max-[560px]:block"
 						aria-hidden="true"
 					></div>
 					<article class={processStepClass} data-process-step>

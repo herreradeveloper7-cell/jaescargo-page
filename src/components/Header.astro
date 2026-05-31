@@ -1,5 +1,5 @@
 ---
-import { ChevronDown, PackageCheck, PackagePlus, Plane, ShoppingBag } from '@lucide/astro';
+import { ChevronDown, Menu, PackageCheck, PackagePlus, Plane, ShoppingBag, X } from '@lucide/astro';
 
 const registerUrl = 'https://wolfbox.app/register';
 
@@ -32,24 +32,36 @@ const servicesActive = currentPath === '/servicios' || currentPath === '/persona
 
 <header class="sticky top-0 z-20 border-b border-border bg-white shadow-[0_14px_36px_rgba(45,45,45,0.08)]">
 	<div
-		class={`${containerClass} grid min-h-[108px] grid-cols-[max-content_minmax(0,1fr)_max-content] items-center gap-[clamp(24px,3vw,44px)] max-[1440px]:min-h-[86px] max-[1440px]:gap-[clamp(20px,2.4vw,34px)] max-[980px]:min-h-0 max-[980px]:grid-cols-[max-content_max-content] max-[980px]:justify-between max-[980px]:gap-[18px] max-[980px]:py-[18px] max-[620px]:grid-cols-1`}
+		class={`${containerClass} grid min-h-[108px] grid-cols-[max-content_minmax(0,1fr)_max-content] items-center gap-[clamp(24px,3vw,44px)] max-[1440px]:min-h-[86px] max-[1440px]:gap-[clamp(20px,2.4vw,34px)] max-[980px]:min-h-0 max-[980px]:grid-cols-[max-content_max-content] max-[980px]:justify-between max-[980px]:gap-[18px] max-[980px]:py-4`}
 	>
 		<a class="inline-flex w-fit items-center justify-self-start leading-none no-underline" href="/" aria-label="JAES Cargo inicio">
-			<img class="h-[92px] w-auto object-contain max-[1440px]:h-[76px] max-[980px]:h-[82px] max-[620px]:h-[70px]" src="/images/logo-horizontal-red.webp" alt="JAES Cargo" width="214" height="92" />
+			<img class="h-[92px] w-auto object-contain max-[1440px]:h-[76px] max-[980px]:h-[70px] max-[620px]:h-[58px]" src="/images/logo-horizontal-red.webp" alt="JAES Cargo" width="214" height="92" />
 		</a>
 
-		<nav
-			class="flex min-w-0 items-center justify-center gap-[clamp(16px,2vw,32px)] max-[1440px]:gap-[clamp(14px,1.7vw,24px)] max-[980px]:col-span-full max-[980px]:row-start-2 max-[980px]:justify-start max-[980px]:overflow-x-auto max-[980px]:pb-2"
-			aria-label="Navegacion principal"
+		<button
+			class="group hidden h-11 w-11 items-center justify-center rounded-md border border-border bg-white text-secondary shadow-[0_12px_26px_rgba(45,45,45,0.08)] transition-[border-color,color,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-primary/35 hover:text-primary hover:shadow-[0_16px_32px_rgba(45,45,45,0.12)] max-[980px]:inline-flex"
+			type="button"
+			aria-label="Abrir navegación"
+			aria-expanded="false"
+			data-menu-toggle
 		>
-			<a class:list={[navLinkClass, { [navLinkActiveClass]: isActive('/') }]} href="/">
+			<Menu class="block group-[.is-open]:hidden" size={24} stroke-width={2.5} aria-hidden="true" />
+			<X class="hidden group-[.is-open]:block" size={24} stroke-width={2.5} aria-hidden="true" />
+		</button>
+
+		<nav
+			class="flex min-w-0 items-center justify-center gap-[clamp(16px,2vw,32px)] max-[1440px]:gap-[clamp(14px,1.7vw,24px)] max-[980px]:col-span-full max-[980px]:hidden max-[980px]:w-full max-[980px]:flex-col max-[980px]:items-stretch max-[980px]:gap-1 max-[980px]:rounded-lg max-[980px]:border max-[980px]:border-border max-[980px]:bg-white max-[980px]:p-3 max-[980px]:shadow-[0_18px_42px_rgba(45,45,45,0.1)] max-[980px]:[&.is-open]:flex"
+			aria-label="Navegacion principal"
+			data-mobile-panel
+		>
+			<a class:list={[navLinkClass, 'max-[980px]:min-h-11 max-[980px]:px-3', { [navLinkActiveClass]: isActive('/') }]} href="/">
 				Inicio
 			</a>
 
-			<div class="group/services relative">
+			<div class="group/services relative max-[980px]:w-full">
 				<a
 					class:list={[
-						`${navLinkClass} gap-1.5`,
+						`${navLinkClass} gap-1.5 max-[980px]:min-h-11 max-[980px]:px-3`,
 						{ [navLinkActiveClass]: servicesActive },
 					]}
 					href="/servicios"
@@ -64,8 +76,8 @@ const servicesActive = currentPath === '/servicios' || currentPath === '/persona
 					/>
 				</a>
 
-				<div class="pointer-events-none absolute left-1/2 top-full z-30 min-w-[230px] -translate-x-1/2 translate-y-3 rounded-lg border border-border bg-white p-2 opacity-0 shadow-[0_20px_46px_rgba(45,45,45,0.14)] transition-[opacity,transform] duration-200 group-hover/services:pointer-events-auto group-hover/services:translate-y-1.5 group-hover/services:opacity-100 group-focus-within/services:pointer-events-auto group-focus-within/services:translate-y-1.5 group-focus-within/services:opacity-100 max-[980px]:left-0 max-[980px]:translate-x-0">
-					<div class="absolute -top-3 left-0 h-3 w-full" aria-hidden="true"></div>
+				<div class="pointer-events-none absolute left-1/2 top-full z-30 min-w-[230px] -translate-x-1/2 translate-y-3 rounded-lg border border-border bg-white p-2 opacity-0 shadow-[0_20px_46px_rgba(45,45,45,0.14)] transition-[opacity,transform] duration-200 group-hover/services:pointer-events-auto group-hover/services:translate-y-1.5 group-hover/services:opacity-100 group-focus-within/services:pointer-events-auto group-focus-within/services:translate-y-1.5 group-focus-within/services:opacity-100 max-[980px]:pointer-events-auto max-[980px]:static max-[980px]:mt-1 max-[980px]:min-w-0 max-[980px]:translate-x-0 max-[980px]:translate-y-0 max-[980px]:border-border max-[980px]:bg-surface max-[980px]:opacity-100 max-[980px]:shadow-none">
+					<div class="absolute -top-3 left-0 h-3 w-full max-[980px]:hidden" aria-hidden="true"></div>
 					{
 						serviceItems.map(({ label, href, Icon }) => (
 							<a
@@ -85,16 +97,16 @@ const servicesActive = currentPath === '/servicios' || currentPath === '/persona
 
 			{
 				navItems.slice(1).map((item) => (
-					<a class:list={[navLinkClass, { [navLinkActiveClass]: isActive(item.href) }]} href={item.href}>
+					<a class:list={[navLinkClass, 'max-[980px]:min-h-11 max-[980px]:px-3', { [navLinkActiveClass]: isActive(item.href) }]} href={item.href}>
 						{item.label}
 					</a>
 				))
 			}
 		</nav>
 
-		<div class="flex items-center justify-end max-[620px]:justify-start">
+		<div class="flex items-center justify-end max-[980px]:col-span-full max-[980px]:hidden max-[980px]:w-full max-[980px]:justify-start max-[980px]:[&.is-open]:flex" data-mobile-panel>
 			<a
-				class="group relative inline-flex min-h-[54px] items-center justify-center gap-2.5 overflow-hidden whitespace-nowrap rounded-md border border-primary bg-[linear-gradient(135deg,rgba(255,255,255,0.16),transparent_36%)] bg-primary px-[26px] py-3.5 font-heading text-[0.9rem] font-bold text-white no-underline shadow-[0_14px_28px_rgba(139,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.18)] transition-[border-color,box-shadow,transform] duration-[180ms] before:absolute before:inset-0 before:-translate-x-[120%] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.36),transparent)] before:transition-transform before:duration-[420ms] hover:-translate-y-0.5 hover:border-primary hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.2),transparent_38%)] hover:bg-primary hover:shadow-[0_18px_34px_rgba(139,0,0,0.28),0_0_0_4px_rgba(139,0,0,0.08),0_0_24px_rgba(139,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.22)] hover:before:translate-x-[120%] max-[1440px]:min-h-[46px] max-[1440px]:px-5 max-[1440px]:py-2.5 max-[1440px]:text-[0.82rem] max-[620px]:w-full"
+				class="group relative inline-flex min-h-[54px] items-center justify-center gap-2.5 overflow-hidden whitespace-nowrap rounded-md border border-primary bg-[linear-gradient(135deg,rgba(255,255,255,0.16),transparent_36%)] bg-primary px-[26px] py-3.5 font-heading text-[0.9rem] font-bold text-white no-underline shadow-[0_14px_28px_rgba(139,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.18)] transition-[border-color,box-shadow,transform] duration-[180ms] before:absolute before:inset-0 before:-translate-x-[120%] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.36),transparent)] before:transition-transform before:duration-[420ms] hover:-translate-y-0.5 hover:border-primary hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.2),transparent_38%)] hover:bg-primary hover:shadow-[0_18px_34px_rgba(139,0,0,0.28),0_0_0_4px_rgba(139,0,0,0.08),0_0_24px_rgba(139,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.22)] hover:before:translate-x-[120%] max-[1440px]:min-h-[46px] max-[1440px]:px-5 max-[1440px]:py-2.5 max-[1440px]:text-[0.82rem] max-[980px]:w-full"
 				href={registerUrl}
 			>
 				<span class="relative z-10">Crear casillero</span>
@@ -103,3 +115,26 @@ const servicesActive = currentPath === '/servicios' || currentPath === '/persona
 		</div>
 	</div>
 </header>
+
+<script>
+	const menuToggle = document.querySelector<HTMLElement>('[data-menu-toggle]');
+	const mobilePanels = document.querySelectorAll<HTMLElement>('[data-mobile-panel]');
+
+	menuToggle?.addEventListener('click', () => {
+		const isOpen = menuToggle.classList.toggle('is-open');
+		menuToggle.setAttribute('aria-expanded', String(isOpen));
+		menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar navegación' : 'Abrir navegación');
+		mobilePanels.forEach((panel) => panel.classList.toggle('is-open', isOpen));
+	});
+
+	mobilePanels.forEach((panel) => {
+		panel.querySelectorAll('a').forEach((link) => {
+			link.addEventListener('click', () => {
+				menuToggle?.classList.remove('is-open');
+				menuToggle?.setAttribute('aria-expanded', 'false');
+				menuToggle?.setAttribute('aria-label', 'Abrir navegación');
+				mobilePanels.forEach((item) => item.classList.remove('is-open'));
+			});
+		});
+	});
+</script>
