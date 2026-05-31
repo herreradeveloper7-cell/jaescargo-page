@@ -6,9 +6,10 @@ const whatsappUrl =
 const instagramUrl = 'https://www.instagram.com/jaescargo/';
 
 const floatButtonClass =
-	'inline-flex h-[54px] w-[54px] cursor-pointer items-center justify-center rounded-full border border-transparent text-white no-underline shadow-[0_16px_34px_rgba(45,45,45,0.18)] transition-[background,box-shadow,transform,opacity] duration-[180ms] hover:-translate-y-0.5 hover:shadow-[0_18px_38px_rgba(45,45,45,0.24)] max-[620px]:h-[50px] max-[620px]:w-[50px]';
+	'group/action inline-flex h-[54px] w-[54px] cursor-pointer items-center justify-center rounded-full border border-transparent text-white no-underline shadow-[0_16px_34px_rgba(45,45,45,0.18)] transition-[background,border-color,box-shadow,transform,opacity] duration-[200ms] hover:-translate-y-1 hover:scale-105 hover:shadow-[0_20px_42px_rgba(45,45,45,0.28),0_0_0_5px_rgba(139,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.2)] max-[620px]:h-[50px] max-[620px]:w-[50px]';
 const quickActionClass =
 	`${floatButtonClass} translate-x-2.5 scale-[0.88] opacity-0 group-[.is-open]/floating:translate-x-0 group-[.is-open]/floating:scale-100 group-[.is-open]/floating:opacity-100`;
+const floatingIconClass = 'transition-transform duration-200 group-hover/action:rotate-6 group-hover/action:scale-110';
 ---
 
 <div
@@ -21,7 +22,7 @@ const quickActionClass =
 		aria-label="Volver arriba"
 		data-scroll-top
 	>
-		<ArrowUp size={22} stroke-width={2.4} aria-hidden="true" />
+		<ArrowUp class={floatingIconClass} size={22} stroke-width={2.4} aria-hidden="true" />
 	</button>
 
 	<div
@@ -35,7 +36,7 @@ const quickActionClass =
 			rel="noreferrer"
 			aria-label="Contactar por WhatsApp"
 		>
-			<MessageCircle size={22} stroke-width={2.4} aria-hidden="true" />
+			<MessageCircle class={floatingIconClass} size={22} stroke-width={2.4} aria-hidden="true" />
 		</a>
 		<a
 			class={`${quickActionClass} border-secondary/20 bg-secondary delay-[80ms]`}
@@ -44,7 +45,7 @@ const quickActionClass =
 			rel="noreferrer"
 			aria-label="Abrir Instagram"
 		>
-			<Camera size={22} stroke-width={2.4} aria-hidden="true" />
+			<Camera class={floatingIconClass} size={22} stroke-width={2.4} aria-hidden="true" />
 		</a>
 	</div>
 
@@ -56,13 +57,13 @@ const quickActionClass =
 		data-actions-toggle
 	>
 		<Phone
-			class="opacity-100 transition-[opacity,transform] duration-[180ms] group-[.is-open]/floating:rotate-45 group-[.is-open]/floating:scale-[0.72] group-[.is-open]/floating:opacity-0"
+			class={`${floatingIconClass} opacity-100 transition-[opacity,transform] duration-[180ms] group-[.is-open]/floating:rotate-45 group-[.is-open]/floating:scale-[0.72] group-[.is-open]/floating:opacity-0`}
 			size={22}
 			stroke-width={2.4}
 			aria-hidden="true"
 		/>
 		<X
-			class="absolute scale-[0.72] -rotate-45 opacity-0 transition-[opacity,transform] duration-[180ms] group-[.is-open]/floating:scale-100 group-[.is-open]/floating:rotate-0 group-[.is-open]/floating:opacity-100"
+			class={`${floatingIconClass} absolute scale-[0.72] -rotate-45 opacity-0 transition-[opacity,transform] duration-[180ms] group-[.is-open]/floating:scale-100 group-[.is-open]/floating:rotate-0 group-[.is-open]/floating:opacity-100`}
 			size={24}
 			stroke-width={2.4}
 			aria-hidden="true"

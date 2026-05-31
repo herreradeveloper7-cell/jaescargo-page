@@ -1,0 +1,342 @@
+---
+import { Calculator, CheckCircle2, DollarSign, Info, MapPin, Package, Send, ShieldCheck, X } from '@lucide/astro';
+
+const inputClass =
+	'w-full rounded-lg border border-border bg-white px-4 py-3.5 font-body text-[0.95rem] font-semibold text-secondary outline-none shadow-[0_10px_24px_rgba(45,45,45,0.05)] transition-[border-color,box-shadow,transform] duration-200 placeholder:text-muted/70 focus:-translate-y-0.5 focus:border-primary/55 focus:shadow-[0_16px_34px_rgba(45,45,45,0.08),0_0_0_4px_rgba(139,0,0,0.08)] max-[1440px]:py-2.5 max-[1440px]:text-[0.86rem]';
+const labelClass = 'mb-2 block font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.06em] text-secondary';
+const iconClass = 'pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-primary/80';
+const resultCardClass =
+	'rounded-lg border border-white/14 bg-white/10 p-4 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-sm max-[1440px]:p-3';
+const actionButtonClass =
+	'group relative inline-flex min-h-12 w-full items-center justify-center gap-2.5 overflow-hidden rounded-lg border border-primary bg-[linear-gradient(135deg,rgba(255,255,255,0.16),transparent_36%)] bg-primary px-5 py-3 font-heading text-[0.9rem] font-extrabold text-white no-underline shadow-[0_16px_34px_rgba(139,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.18)] transition-[border-color,box-shadow,transform] duration-[180ms] before:absolute before:inset-0 before:-translate-x-[120%] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] before:transition-transform before:duration-[420ms] hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_20px_42px_rgba(139,0,0,0.28),0_0_0_4px_rgba(139,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.22)] hover:before:translate-x-[120%] max-[1440px]:min-h-10 max-[1440px]:px-4 max-[1440px]:py-2.5 max-[1440px]:text-[0.82rem]';
+---
+
+<div
+	id="cotizador"
+	class="group/quote pointer-events-none fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-secondary/0 p-5 opacity-0 transition-[background,opacity] duration-300 [&.is-open]:pointer-events-auto [&.is-open]:bg-secondary/72 [&.is-open]:opacity-100 max-[1440px]:items-start max-[1440px]:p-3 max-[640px]:items-end max-[640px]:p-0"
+	aria-hidden="true"
+	data-quote-modal
+>
+	<button class="absolute inset-0 cursor-default" type="button" aria-label="Cerrar cotizador" data-quote-close></button>
+
+	<section
+		class="relative my-8 grid w-full max-w-[1060px] translate-y-8 scale-[0.96] overflow-hidden rounded-xl border border-white/20 bg-white opacity-0 shadow-[0_34px_90px_rgba(0,0,0,0.36)] transition-[opacity,transform] duration-[520ms] group-[.is-open]/quote:translate-y-0 group-[.is-open]/quote:scale-100 group-[.is-open]/quote:opacity-100 group-[.is-open]/quote:animate-blurred-fade-in group-[.is-open]/quote:animate-duration-[520ms] group-[.is-open]/quote:animate-fill-mode-both lg:grid-cols-[0.86fr_1.14fr] max-[1440px]:my-0 max-[1440px]:max-h-[calc(100vh-24px)] max-[1440px]:max-w-[920px] max-[1440px]:overflow-y-auto max-[640px]:my-0 max-[640px]:max-h-[94vh] max-[640px]:overflow-y-auto max-[640px]:rounded-b-none max-[640px]:rounded-t-xl"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="quote-title"
+	>
+		<div class="relative overflow-hidden bg-[linear-gradient(155deg,var(--color-primary)_0%,var(--color-primary-dark)_52%,var(--color-secondary)_100%)] p-7 text-white max-[1440px]:p-5 max-[640px]:p-5">
+			<div class="absolute -right-20 -top-20 h-52 w-52 rounded-full border border-white/12 bg-white/8 blur-sm" aria-hidden="true"></div>
+			<div class="absolute -bottom-24 left-8 h-56 w-56 rounded-full border border-white/10 bg-white/6 blur-md" aria-hidden="true"></div>
+
+			<div class="relative z-10">
+				<div class="flex items-start justify-between gap-5">
+					<div>
+						<span class="font-heading text-[0.72rem] font-extrabold uppercase tracking-[0.1em] text-white/75 max-[1440px]:text-[0.66rem]">
+							Casillero internacional
+						</span>
+						<h2 id="quote-title" class="mt-2 font-heading text-[clamp(1.65rem,2.45vw,2.35rem)] font-extrabold leading-[1.08] max-[1440px]:text-[1.62rem]">
+							Cotiza tu envío de forma rápida.
+						</h2>
+					</div>
+					<span class="inline-flex h-13 w-13 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 shadow-[0_16px_34px_rgba(0,0,0,0.18)] group-[.is-open]/quote:animate-float group-[.is-open]/quote:animate-duration-[3600ms] group-[.is-open]/quote:animate-iteration-count-infinite group-[.is-open]/quote:animate-ease-in-out max-[1440px]:h-11 max-[1440px]:w-11">
+						<Calculator size={25} stroke-width={2.3} aria-hidden="true" />
+					</span>
+				</div>
+
+				<p class="mt-4 max-w-[430px] text-[0.95rem] leading-[1.75] text-white/78 max-[1440px]:mt-3 max-[1440px]:text-[0.82rem] max-[1440px]:leading-[1.6]">
+					Ingresa los datos principales del paquete y revisa el seguro estimado según nuestras reglas para envíos por casillero.
+				</p>
+
+				<div class="mt-7 grid gap-3 max-[1440px]:mt-4 max-[1440px]:gap-2.5">
+					<article class={resultCardClass}>
+						<div class="flex items-start gap-3">
+							<span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-primary max-[1440px]:h-9 max-[1440px]:w-9">
+								<ShieldCheck size={20} stroke-width={2.4} aria-hidden="true" />
+							</span>
+							<div>
+								<h3 class="font-heading text-[0.94rem] font-extrabold max-[1440px]:text-[0.82rem]">Seguro del paquete</h3>
+								<p class="mt-1 text-[0.82rem] leading-[1.6] text-white/74 max-[1440px]:text-[0.74rem] max-[1440px]:leading-[1.45]">
+									El seguro siempre corresponde al 10% del valor declarado, respetando el mínimo aplicable por peso.
+								</p>
+							</div>
+						</div>
+					</article>
+
+					<article class={resultCardClass}>
+						<div class="flex items-start gap-3">
+							<span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-primary max-[1440px]:h-9 max-[1440px]:w-9">
+								<Info size={20} stroke-width={2.4} aria-hidden="true" />
+							</span>
+							<div>
+								<h3 class="font-heading text-[0.94rem] font-extrabold max-[1440px]:text-[0.82rem]">Mínimos asegurados</h3>
+								<p class="mt-1 text-[0.82rem] leading-[1.6] text-white/74 max-[1440px]:text-[0.74rem] max-[1440px]:leading-[1.45]">
+									De 1 a 5 lbs y hasta USD 100: mínimo USD 5. Paquetes superiores a 5 lbs: mínimo USD 10.
+								</p>
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</div>
+
+		<div class="relative bg-surface p-7 max-[1440px]:p-5 max-[640px]:p-5">
+			<button
+				class="absolute right-5 top-5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-secondary shadow-[0_12px_26px_rgba(45,45,45,0.08)] transition-[border-color,color,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/35 hover:text-primary"
+				type="button"
+				aria-label="Cerrar cotizador"
+				data-quote-close
+			>
+				<X size={20} stroke-width={2.4} aria-hidden="true" />
+			</button>
+
+			<form class="pr-12 max-[1440px]:pr-9 max-[640px]:pr-0" data-quote-form>
+				<span class="font-heading text-[0.74rem] font-extrabold uppercase tracking-[0.08em] text-primary max-[1440px]:text-[0.66rem]">
+					Datos del envío
+				</span>
+				<h3 class="mt-2 font-heading text-[clamp(1.35rem,2vw,1.95rem)] font-extrabold leading-[1.12] text-secondary max-[1440px]:text-[1.42rem]">
+					Calcula el seguro de tu casillero.
+				</h3>
+
+				<div class="mt-6 grid gap-5 sm:grid-cols-2 max-[1440px]:mt-4 max-[1440px]:gap-3">
+					<label class="sm:col-span-2">
+						<span class={labelClass}>País destino</span>
+						<div class="relative">
+							<MapPin class={iconClass} size={18} stroke-width={2.3} aria-hidden="true" />
+							<select class={`${inputClass} pl-11`} name="country" data-quote-country>
+								<option value="Colombia">Colombia</option>
+							</select>
+						</div>
+					</label>
+
+					<label>
+						<span class={labelClass}>Peso en lbs</span>
+						<div class="relative">
+							<Package class={iconClass} size={18} stroke-width={2.3} aria-hidden="true" />
+							<input
+								class={`${inputClass} pl-11`}
+								type="number"
+								name="weight"
+								min="1"
+								max="110"
+								step="1"
+								inputmode="numeric"
+								placeholder="Ej: 8"
+								data-quote-weight
+							/>
+						</div>
+						<p class="mt-2 text-[0.78rem] leading-[1.45] text-muted max-[1440px]:mt-1.5 max-[1440px]:text-[0.7rem]">Máximo 110 lbs, sin decimales.</p>
+					</label>
+
+					<label>
+						<span class={labelClass}>Valor declarado USD</span>
+						<div class="relative">
+							<DollarSign class={iconClass} size={18} stroke-width={2.3} aria-hidden="true" />
+							<input
+								class={`${inputClass} pl-11`}
+								type="number"
+								name="declared"
+								min="1"
+								max="2000"
+								step="1"
+								inputmode="numeric"
+								placeholder="Ej: 250"
+								data-quote-declared
+							/>
+						</div>
+						<p class="mt-2 text-[0.78rem] leading-[1.45] text-muted max-[1440px]:mt-1.5 max-[1440px]:text-[0.7rem]">Límite máximo USD 2.000.</p>
+					</label>
+				</div>
+
+				<div class="mt-6 rounded-lg border border-border bg-white p-5 shadow-[0_18px_42px_rgba(45,45,45,0.07)] max-[1440px]:mt-4 max-[1440px]:p-4">
+					<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-[1440px]:gap-3">
+						<div>
+							<span class="font-heading text-[0.72rem] font-extrabold uppercase tracking-[0.06em] text-muted max-[1440px]:text-[0.62rem]">Destino</span>
+							<strong class="mt-1 block font-heading text-[1.05rem] font-extrabold text-secondary max-[1440px]:text-[0.92rem]" data-quote-country-output>Colombia</strong>
+						</div>
+						<div>
+							<span class="font-heading text-[0.72rem] font-extrabold uppercase tracking-[0.06em] text-muted max-[1440px]:text-[0.62rem]">Flete estimado</span>
+							<strong class="mt-1 block font-heading text-[1.05rem] font-extrabold text-secondary max-[1440px]:text-[0.92rem]" data-quote-freight>USD 0.00</strong>
+						</div>
+						<div>
+							<span class="font-heading text-[0.72rem] font-extrabold uppercase tracking-[0.06em] text-muted max-[1440px]:text-[0.62rem]">Seguro estimado</span>
+							<strong class="mt-1 block font-heading text-[1.05rem] font-extrabold text-secondary max-[1440px]:text-[0.92rem]" data-quote-insurance>USD 0.00</strong>
+						</div>
+						<div>
+							<span class="font-heading text-[0.72rem] font-extrabold uppercase tracking-[0.06em] text-muted max-[1440px]:text-[0.62rem]">Total estimado</span>
+							<strong class="mt-1 block font-heading text-[1.25rem] font-extrabold text-primary max-[1440px]:text-[1.04rem]" data-quote-total>USD 0.00</strong>
+						</div>
+					</div>
+
+					<div class="mt-5 flex items-start gap-3 rounded-lg border border-primary/12 bg-primary/5 p-4 max-[1440px]:mt-3 max-[1440px]:p-3">
+						<CheckCircle2 class="mt-0.5 shrink-0 text-primary" size={19} stroke-width={2.4} aria-hidden="true" />
+						<p class="text-[0.85rem] leading-[1.6] text-muted max-[1440px]:text-[0.74rem] max-[1440px]:leading-[1.45]" data-quote-message>
+							Completa peso y valor declarado para ver el seguro estimado.
+						</p>
+					</div>
+				</div>
+
+				<div class="mt-6 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center max-[1440px]:mt-4">
+					<p class="text-[0.82rem] leading-[1.55] text-muted max-[1440px]:text-[0.72rem] max-[1440px]:leading-[1.45]">
+						Esta cotización muestra flete y seguro estimados. El valor final puede incluir impuestos, nacionalización o cargos adicionales según el paquete.
+					</p>
+					<button class={`${actionButtonClass} sm:w-auto`} type="submit" data-quote-submit disabled>
+						<span class="relative z-10">Enviar cotización</span>
+						<Send class="relative z-10 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" size={18} stroke-width={2.4} aria-hidden="true" />
+					</button>
+				</div>
+			</form>
+		</div>
+	</section>
+</div>
+
+<script>
+	const quoteModal = document.querySelector<HTMLElement>('[data-quote-modal]');
+	const quoteForm = document.querySelector<HTMLFormElement>('[data-quote-form]');
+	const quoteOpeners = document.querySelectorAll<HTMLAnchorElement>('a[href="#cotizador"], [data-quote-open]');
+	const quoteClosers = document.querySelectorAll('[data-quote-close]');
+	const weightInput = document.querySelector<HTMLInputElement>('[data-quote-weight]');
+	const declaredInput = document.querySelector<HTMLInputElement>('[data-quote-declared]');
+	const insuranceOutput = document.querySelector<HTMLElement>('[data-quote-insurance]');
+	const freightOutput = document.querySelector<HTMLElement>('[data-quote-freight]');
+	const totalOutput = document.querySelector<HTMLElement>('[data-quote-total]');
+	const messageOutput = document.querySelector<HTMLElement>('[data-quote-message]');
+	const submitButton = document.querySelector<HTMLButtonElement>('[data-quote-submit]');
+
+	const currency = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD',
+		minimumFractionDigits: 2,
+	});
+
+	const calculateFreight = (weight: number) => {
+		if (weight === 1) return 7;
+		if (weight >= 2 && weight <= 5) return 15;
+		if (weight >= 6 && weight <= 10) return 20;
+		if (weight > 10) return 20 + (weight - 10) * 2.5;
+		return 0;
+	};
+
+	const getQuoteValues = () => {
+		const weight = Number(weightInput?.value || 0);
+		const declared = Number(declaredInput?.value || 0);
+		const validWeight = Number.isInteger(weight) && weight >= 1 && weight <= 110;
+		const validDeclared = Number.isInteger(declared) && declared >= 1 && declared <= 2000;
+		const minimum = weight > 5 ? 10 : 5;
+		const freight = validWeight ? calculateFreight(weight) : 0;
+		const percentageInsurance = declared * 0.1;
+		const insurance = validWeight && validDeclared ? Math.max(percentageInsurance, minimum) : 0;
+		const total = validWeight && validDeclared ? freight + insurance : 0;
+
+		return { weight, declared, validWeight, validDeclared, minimum, freight, percentageInsurance, insurance, total };
+	};
+
+	const updateQuote = () => {
+		if (!weightInput || !declaredInput || !insuranceOutput || !freightOutput || !totalOutput || !messageOutput || !submitButton) return;
+
+		const { weight, declared, validWeight, validDeclared, minimum, freight, percentageInsurance, insurance, total } = getQuoteValues();
+
+		freightOutput.textContent = freight ? currency.format(freight) : 'USD 0.00';
+		insuranceOutput.textContent = insurance ? currency.format(insurance) : 'USD 0.00';
+		totalOutput.textContent = total ? currency.format(total) : 'USD 0.00';
+		submitButton.disabled = !(validWeight && validDeclared);
+		submitButton.classList.toggle('opacity-60', submitButton.disabled);
+		submitButton.classList.toggle('cursor-not-allowed', submitButton.disabled);
+
+		if (!weight && !declared) {
+			messageOutput.textContent = 'Completa peso y valor declarado para ver el seguro estimado.';
+			return;
+		}
+
+		if (!validWeight) {
+			messageOutput.textContent = 'El peso debe ser un número entero entre 1 y 110 lbs.';
+			return;
+		}
+
+		if (!validDeclared) {
+			messageOutput.textContent = 'El valor declarado debe ser un número entero entre USD 1 y USD 2.000.';
+			return;
+		}
+
+		const minimumReason =
+			weight <= 5 && declared <= 100
+				? 'Aplica mínimo asegurado de USD 5 para paquetes de 1 a 5 lbs con valor declarado máximo de USD 100.'
+				: weight > 5
+					? 'Aplica mínimo asegurado de USD 10 por ser un paquete superior a 5 lbs.'
+					: 'El 10% del valor declarado supera el mínimo asegurado.';
+
+		messageOutput.textContent = `El flete estimado es ${currency.format(freight)}. El 10% del valor declarado es ${currency.format(percentageInsurance)}. ${minimumReason} Total estimado: ${currency.format(total)}.`;
+	};
+
+	const openQuoteModal = () => {
+		if (!quoteModal) return;
+		quoteModal.classList.add('is-open');
+		quoteModal.setAttribute('aria-hidden', 'false');
+		document.body.classList.add('overflow-hidden');
+		window.setTimeout(() => weightInput?.focus(), 120);
+		if (window.location.hash !== '#cotizador') {
+			window.history.pushState(null, '', '#cotizador');
+		}
+	};
+
+	const closeQuoteModal = () => {
+		if (!quoteModal) return;
+		quoteModal.classList.remove('is-open');
+		quoteModal.setAttribute('aria-hidden', 'true');
+		document.body.classList.remove('overflow-hidden');
+		if (window.location.hash === '#cotizador') {
+			window.history.pushState(null, '', `${window.location.pathname}${window.location.search}`);
+		}
+	};
+
+	quoteOpeners.forEach((opener) => {
+		opener.addEventListener('click', (event) => {
+			event.preventDefault();
+			openQuoteModal();
+		});
+	});
+
+	quoteClosers.forEach((closer) => {
+		closer.addEventListener('click', closeQuoteModal);
+	});
+
+	[weightInput, declaredInput].forEach((input) => {
+		input?.addEventListener('input', () => {
+			if (input.value.includes('.')) input.value = input.value.split('.')[0];
+			updateQuote();
+		});
+	});
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape') closeQuoteModal();
+	});
+
+	window.addEventListener('hashchange', () => {
+		if (window.location.hash === '#cotizador') openQuoteModal();
+	});
+
+	quoteForm?.addEventListener('submit', (event) => {
+		event.preventDefault();
+		const { weight, declared, validWeight, validDeclared, freight, insurance, minimum, total } = getQuoteValues();
+		if (!validWeight || !validDeclared) return;
+
+		const whatsappMessage = [
+			'Hola JAES Cargo, quiero cotizar un envío por casillero.',
+			'',
+			'Destino: Colombia',
+			`Peso: ${weight} lbs`,
+			`Valor declarado: ${currency.format(declared)}`,
+			`Flete estimado: ${currency.format(freight)}`,
+			`Mínimo asegurado aplicado: ${currency.format(minimum)}`,
+			`Seguro estimado: ${currency.format(insurance)}`,
+			`Total estimado: ${currency.format(total)}`,
+			'',
+			'Quedo atento a la confirmación del valor final del envío.',
+		].join('\n');
+
+		window.open(`https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`, '_blank', 'noopener,noreferrer');
+	});
+
+	if (window.location.hash === '#cotizador') openQuoteModal();
+	updateQuote();
+</script>

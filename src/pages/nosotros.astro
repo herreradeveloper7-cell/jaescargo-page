@@ -1,9 +1,62 @@
 ---
+import { ArrowRight, Eye, Globe2, HeartHandshake, MessageCircle, PackageCheck, ShieldCheck, Target } from '@lucide/astro';
 import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 import CtaSection from '../components/CtaSection.astro';
 
 const containerClass = 'mx-auto w-full max-w-[1180px] px-6 max-[760px]:px-[18px]';
+const valueCardClass =
+	'group relative overflow-hidden translate-y-8 rounded-lg border border-border bg-white p-[30px] opacity-0 shadow-[0_18px_42px_rgba(45,45,45,0.08)] transition-[opacity,box-shadow,transform] duration-[760ms] ease-out [&.is-visible]:translate-y-0 [&.is-visible]:opacity-100 [&.is-visible]:animate-fade-in-up [&.is-visible]:animate-duration-[760ms] [&.is-visible]:animate-fill-mode-both [&.is-visible]:animate-bezier-quart-out hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_24px_54px_rgba(45,45,45,0.13),0_0_0_1px_rgba(139,0,0,0.08)]';
+const iconClass =
+	'relative z-10 mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full border border-transparent bg-[linear-gradient(var(--color-white),var(--color-white))_padding-box,linear-gradient(135deg,var(--color-primary),var(--color-secondary))_border-box] text-primary shadow-[0_12px_26px_rgba(139,0,0,0.1)] transition-transform duration-200 group-hover:scale-105';
+const missionCardClass =
+	'group/mission-card translate-y-8 scale-[0.96] opacity-0 transition-[opacity,transform] duration-[860ms] ease-out [&.is-visible]:translate-y-0 [&.is-visible]:scale-100 [&.is-visible]:opacity-100 [&.is-visible]:animate-blurred-fade-in [&.is-visible]:animate-duration-[860ms] [&.is-visible]:animate-fill-mode-both [&.is-visible]:animate-bezier-quart-out';
+const missionCardInnerClass =
+	'relative h-full overflow-hidden rounded-lg border border-white/18 bg-white p-8 text-secondary shadow-[0_28px_70px_rgba(45,45,45,0.22)] transition-[border-color,box-shadow,transform] duration-300 group-hover/mission-card:-translate-y-2 group-hover/mission-card:border-white/50 group-hover/mission-card:shadow-[0_34px_86px_rgba(45,45,45,0.28),0_0_0_6px_rgba(255,255,255,0.1)] group-[.is-visible]/mission-card:animate-float group-[.is-visible]/mission-card:animate-duration-[4200ms] group-[.is-visible]/mission-card:animate-iteration-count-infinite group-[.is-visible]/mission-card:animate-ease-in-out motion-reduce:animate-none max-[560px]:p-6';
+
+const values = [
+	{
+		title: 'Claridad',
+		text: 'Procesos entendibles, comunicación oportuna y seguimiento para cada operación.',
+		Icon: MessageCircle,
+	},
+	{
+		title: 'Respaldo',
+		text: 'Gestión enfocada en cuidar tus compras, paquetes, documentos y exportaciones.',
+		Icon: ShieldCheck,
+	},
+	{
+		title: 'Cercanía',
+		text: 'Atención humana para resolver dudas y acompañarte antes, durante y después del envío.',
+		Icon: HeartHandshake,
+	},
+];
+
+const storySteps = [
+	{
+		title: 'Servicio',
+		text: 'Crecimos alrededor de envíos internacionales, casilleros y gestión personalizada.',
+	},
+	{
+		title: 'Confianza',
+		text: 'Trabajamos para que cada paquete llegue con puntualidad, cuidado y transparencia.',
+	},
+];
+
+const missionVision = [
+	{
+		title: 'Misión',
+		text:
+			'Brindar soluciones logísticas internacionales confiables, seguras y eficientes, acompañando a personas y empresas en cada envío con procesos claros, atención cercana y compromiso permanente.',
+		Icon: Target,
+	},
+	{
+		title: 'Visión',
+		text:
+			'Ser un aliado logístico de referencia para quienes buscan conectar mercados, compras y oportunidades internacionales con transparencia, innovación y respaldo profesional.',
+		Icon: Eye,
+	},
+];
 ---
 
 <Layout
@@ -12,37 +65,291 @@ const containerClass = 'mx-auto w-full max-w-[1180px] px-6 max-[760px]:px-[18px]
 >
 	<Header />
 	<main>
-		<section class="bg-[linear-gradient(90deg,rgba(45,45,45,0.9),rgba(139,0,0,0.82)),url('https://images.unsplash.com/photo-1494412685616-a5d310fbb07d?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center py-[108px] text-white">
+		<section class="bg-[linear-gradient(90deg,rgba(255,255,255,0.94)_0%,rgba(255,255,255,0.84)_56%,rgba(255,255,255,0.38)_100%),url('/images/llamado-accion1.webp')] bg-cover bg-center py-[72px] pb-[60px] max-[760px]:bg-[linear-gradient(90deg,rgba(255,255,255,0.94)_0%,rgba(255,255,255,0.84)_100%),url('/images/llamado-accion1.webp')] max-[760px]:py-14">
 			<div class={containerClass}>
-				<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-white">
+				<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-primary">
 					Nosotros
 				</span>
-				<h1 class="mt-3 max-w-[920px] font-heading text-[clamp(2.2rem,5vw,4.6rem)] leading-[1.08] text-white">
-					Somos un aliado logistico para personas y empresas que se mueven entre mercados.
+				<h1 class="mt-3 max-w-[700px] font-heading text-[clamp(2rem,3.9vw,3.55rem)] font-extrabold leading-[1.08] text-secondary">
+					Aliados logísticos con <span class="text-primary">respaldo internacional</span>.
 				</h1>
-				<p class="mt-[22px] max-w-[720px] text-[1.08rem] leading-[1.7] text-white/85">
-					JAES Cargo nace para simplificar el acceso a soluciones internacionales de casillero,
-					courier, exportaciones y correo especializado, con atencion cercana y procesos ordenados.
+				<span class="mt-5 block h-[3px] w-[72px] rounded-full bg-primary"></span>
+				<p class="mt-[18px] max-w-[680px] text-[1.04rem] leading-[1.7] text-muted">
+					Simplificamos casilleros, courier, exportaciones y correo especializado con
+					atención cercana, procesos ordenados y acompañamiento claro.
 				</p>
 			</div>
 		</section>
 
-		<section class="bg-surface py-[88px] max-[760px]:py-16">
-			<div class={`${containerClass} grid grid-cols-3 gap-[18px] max-[820px]:grid-cols-1`}>
-				<article class="rounded-lg border border-border bg-white p-[30px]">
-					<h2 class="mb-3 font-heading text-[1.35rem] text-secondary">Claridad</h2>
-					<p class="leading-[1.7] text-muted">Procesos entendibles, comunicacion oportuna y seguimiento para cada operacion.</p>
-				</article>
-				<article class="rounded-lg border border-border bg-white p-[30px]">
-					<h2 class="mb-3 font-heading text-[1.35rem] text-secondary">Respaldo</h2>
-					<p class="leading-[1.7] text-muted">Gestion enfocada en cuidar tus compras, paquetes, documentos y exportaciones.</p>
-				</article>
-				<article class="rounded-lg border border-border bg-white p-[30px]">
-					<h2 class="mb-3 font-heading text-[1.35rem] text-secondary">Cercania</h2>
-					<p class="leading-[1.7] text-muted">Atencion humana para resolver dudas y acompanarte antes, durante y despues del envio.</p>
-				</article>
+		<section class="bg-surface py-[72px] max-[760px]:py-14">
+			<div class={containerClass}>
+				<div class="mx-auto max-w-[760px] text-center">
+					<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-primary">
+						Nuestra forma de trabajar
+					</span>
+					<h2 class="mt-2 font-heading text-[clamp(1.7rem,2.6vw,2.75rem)] font-extrabold leading-[1.1] text-secondary">
+						Acompañamos cada envío con confianza.
+					</h2>
+					<div class="mt-5 flex items-center justify-center gap-3" aria-hidden="true">
+						<span class="block h-[3px] w-[72px] rounded-full bg-primary"></span>
+					</div>
+				</div>
+
+				<div class="mt-12 grid grid-cols-3 gap-[18px] max-[820px]:grid-cols-1" data-about-values>
+					{
+						values.map(({ title, text, Icon }, index) => (
+							<article
+								class={`${valueCardClass} ${index === 1 ? 'animate-delay-[160ms]' : ''} ${index === 2 ? 'animate-delay-[320ms]' : ''}`}
+								data-about-card
+								data-spotlight-card
+							>
+								<span
+									class="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-300 bg-[radial-gradient(circle_at_var(--spotlight-x,50%)_var(--spotlight-y,50%),rgba(139,0,0,0.20),transparent_38%)] group-hover:opacity-100"
+									aria-hidden="true"
+								></span>
+								<div class={iconClass}>
+									<Icon size={29} stroke-width={2.2} aria-hidden="true" />
+								</div>
+								<h3 class="relative z-10 mb-3 font-heading text-[1.35rem] font-extrabold text-secondary">{title}</h3>
+								<p class="relative z-10 leading-[1.7] text-muted">{text}</p>
+							</article>
+						))
+					}
+				</div>
 			</div>
 		</section>
+
+		<section class="overflow-hidden bg-white py-[72px] max-[760px]:py-14" aria-label="Nuestra historia">
+			<div class={containerClass}>
+				<div
+					class="grid translate-y-8 grid-cols-[0.8fr_1.2fr] gap-0 overflow-hidden rounded-lg border border-border bg-white opacity-0 shadow-[0_28px_72px_rgba(45,45,45,0.12)] transition-[opacity,transform] duration-[820ms] ease-out [&.is-visible]:translate-y-0 [&.is-visible]:opacity-100 [&.is-visible]:animate-fade-in-up [&.is-visible]:animate-duration-[820ms] [&.is-visible]:animate-fill-mode-both [&.is-visible]:animate-bezier-quart-out max-[940px]:grid-cols-1"
+					data-story-content
+				>
+					<div class="relative bg-[linear-gradient(150deg,var(--color-primary)_0%,var(--color-primary-dark)_100%)] p-8 text-white max-[560px]:p-6">
+						<div class="absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(255,255,255,0.24),transparent_26%),radial-gradient(circle_at_88%_86%,rgba(255,255,255,0.12),transparent_28%)]" aria-hidden="true"></div>
+						<div class="relative z-10 flex h-full min-h-[420px] flex-col justify-between max-[940px]:min-h-[300px]">
+							<div>
+								<span class="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/24 bg-white/12 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
+									<Globe2 size={30} stroke-width={1.9} aria-hidden="true" />
+								</span>
+								<h2 class="mt-6 max-w-[320px] font-heading text-[clamp(1.6rem,2.3vw,2.35rem)] font-extrabold leading-[1.1] text-white">
+									Nuestra historia
+								</h2>
+								<p class="mt-4 max-w-[360px] text-[0.96rem] leading-[1.75] text-white/78">
+									Una visión logística convertida en acompañamiento real para personas y empresas.
+								</p>
+							</div>
+
+							<div class="mt-8 grid gap-3">
+								{storySteps.map(({ title, text }, index) => (
+									<div class="grid grid-cols-[36px_1fr] gap-3 rounded-lg border border-white/16 bg-white/10 p-4">
+										<span class="flex h-9 w-9 items-center justify-center rounded-full bg-white font-heading text-[0.82rem] font-extrabold text-primary">
+											{index + 1}
+										</span>
+										<div>
+											<h3 class="font-heading text-[0.96rem] font-extrabold text-white">{title}</h3>
+											<p class="mt-1 text-[0.82rem] leading-[1.55] text-white/72">{text}</p>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					</div>
+
+					<div class="p-9 max-[560px]:p-6">
+						<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-primary">
+							Desde el inicio
+						</span>
+						<h2 class="mt-2 max-w-[560px] font-heading text-[clamp(1.55rem,2.25vw,2.25rem)] font-extrabold leading-[1.12] text-secondary">
+							Conectar con seguridad.
+						</h2>
+						<div class="mt-5 flex items-center gap-3" aria-hidden="true">
+							<span class="block h-[3px] w-[72px] rounded-full bg-primary"></span>
+						</div>
+
+						<div class="mt-7 grid grid-cols-[3px_1fr] gap-5">
+							<span class="rounded-full bg-primary"></span>
+							<div class="space-y-5">
+								<p class="text-[1rem] leading-[1.85] text-muted">
+									En JaesCargo Internacional nacimos con la visión de conectar personas y negocios
+									a través de soluciones logísticas confiables, seguras y eficientes.
+								</p>
+								<p class="text-[1rem] leading-[1.85] text-muted">
+									Desde nuestros inicios, hemos trabajado con pasión para ofrecer servicios de
+									envíos internacionales, manejo de casilleros y gestión logística personalizada,
+									garantizando que cada paquete llegue a su destino con puntualidad y cuidado.
+								</p>
+								<p class="text-[1rem] leading-[1.85] text-muted">
+									Nuestro compromiso con la calidad, la transparencia y la innovación nos ha
+									convertido en un aliado estratégico para quienes buscan confianza en cada envío.
+								</p>
+							</div>
+						</div>
+
+						<div class="mt-8 flex flex-wrap gap-3">
+							<span class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 font-heading text-[0.82rem] font-extrabold text-secondary">
+								<ShieldCheck class="text-primary" size={17} stroke-width={2.2} aria-hidden="true" />
+								Transparencia
+							</span>
+							<span class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 font-heading text-[0.82rem] font-extrabold text-secondary">
+								<PackageCheck class="text-primary" size={17} stroke-width={2.2} aria-hidden="true" />
+								Cuidado
+							</span>
+							<span class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 font-heading text-[0.82rem] font-extrabold text-secondary">
+								<ArrowRight class="text-primary" size={17} stroke-width={2.2} aria-hidden="true" />
+								Innovación
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="overflow-hidden bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.16)_0%,transparent_34%),linear-gradient(180deg,var(--color-primary)_0%,var(--color-primary-dark)_100%)] py-[72px] text-white max-[760px]:py-14" aria-label="Misión y visión">
+			<div class={containerClass}>
+				<div class="mx-auto max-w-[760px] text-center">
+					<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-white/82">
+						Proyección JAES Cargo
+					</span>
+					<h2 class="mt-2 font-heading text-[clamp(1.7rem,2.6vw,2.75rem)] font-extrabold leading-[1.1] text-white">
+						Misión y visión
+					</h2>
+					<div class="mt-5 flex items-center justify-center gap-3" aria-hidden="true">
+						<span class="block h-[3px] w-[72px] rounded-full bg-white"></span>
+						<span class="block h-[3px] w-8 rounded-full bg-white/28"></span>
+					</div>
+					<p class="mx-auto mt-5 max-w-[620px] text-[0.96rem] leading-[1.75] text-white/78">
+						Dos principios que orientan nuestra operación y la manera en que acompañamos cada proceso logístico.
+					</p>
+				</div>
+
+				<div class="mt-12 grid grid-cols-2 gap-6 max-[820px]:grid-cols-1" data-mission-vision>
+					{
+						missionVision.map(({ title, text, Icon }, index) => (
+							<article
+								class={`${missionCardClass} ${index === 1 ? 'animate-delay-[180ms]' : ''}`}
+								data-mission-card
+							>
+								<div class={`${missionCardInnerClass} ${index === 1 ? 'group-[.is-visible]/mission-card:animate-delay-[450ms]' : ''}`}>
+									<div class="absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(139,0,0,0.09),transparent_26%),radial-gradient(circle_at_96%_100%,rgba(45,45,45,0.08),transparent_30%)]" aria-hidden="true"></div>
+									<div class="relative z-10">
+										<div class="inline-flex h-16 w-16 items-center justify-center rounded-full border border-transparent bg-[linear-gradient(var(--color-white),var(--color-white))_padding-box,linear-gradient(135deg,var(--color-primary),var(--color-secondary))_border-box] text-primary shadow-[0_16px_34px_rgba(139,0,0,0.12)] transition-transform duration-300 group-hover/mission-card:scale-110 group-hover/mission-card:rotate-3">
+											<Icon size={32} stroke-width={2.05} aria-hidden="true" />
+										</div>
+										<h3 class="mt-6 font-heading text-[clamp(1.32rem,1.7vw,1.75rem)] font-extrabold leading-[1.12] text-secondary">
+											{title}
+										</h3>
+										<span class="mt-4 block h-[3px] w-[58px] rounded-full bg-primary"></span>
+										<p class="mt-5 text-[0.98rem] leading-[1.8] text-muted">
+											{text}
+										</p>
+									</div>
+									<div class="relative z-10 mt-7 flex items-center gap-2 font-heading text-[0.82rem] font-extrabold uppercase tracking-[0.06em] text-primary/80">
+										<span class="h-2 w-2 rounded-full bg-primary"></span>
+										JAES Cargo Internacional
+									</div>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
 		<CtaSection />
 	</main>
 </Layout>
+
+<script>
+	const storyContent = document.querySelector<HTMLElement>('[data-story-content]');
+	const aboutValues = document.querySelector<HTMLElement>('[data-about-values]');
+	const missionVisionSection = document.querySelector<HTMLElement>('[data-mission-vision]');
+	const spotlightCards = Array.from(document.querySelectorAll<HTMLElement>('[data-spotlight-card]'));
+
+	spotlightCards.forEach((card) => {
+		card.addEventListener('pointermove', (event) => {
+			const rect = card.getBoundingClientRect();
+			const x = ((event.clientX - rect.left) / rect.width) * 100;
+			const y = ((event.clientY - rect.top) / rect.height) * 100;
+			card.style.setProperty('--spotlight-x', `${x}%`);
+			card.style.setProperty('--spotlight-y', `${y}%`);
+		});
+
+	});
+
+	if (aboutValues) {
+		const cards = Array.from(aboutValues.querySelectorAll<HTMLElement>('[data-about-card]'));
+		const revealCards = () => {
+			cards.forEach((card, index) => {
+				window.setTimeout(() => {
+					card.classList.add('is-visible');
+				}, index * 180);
+			});
+		};
+
+		if (!('IntersectionObserver' in window)) {
+			revealCards();
+		} else {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						revealCards();
+						observer.disconnect();
+					}
+				},
+				{ threshold: 0.24, rootMargin: '0px 0px -10% 0px' },
+			);
+
+			observer.observe(aboutValues);
+		}
+	}
+
+	if (storyContent) {
+		const revealStory = () => {
+			storyContent.classList.add('is-visible');
+		};
+
+		if (!('IntersectionObserver' in window)) {
+			revealStory();
+		} else {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						revealStory();
+						observer.disconnect();
+					}
+				},
+				{ threshold: 0.24, rootMargin: '0px 0px -10% 0px' },
+			);
+
+			observer.observe(storyContent);
+		}
+	}
+
+	if (missionVisionSection) {
+		const cards = Array.from(missionVisionSection.querySelectorAll<HTMLElement>('[data-mission-card]'));
+		const revealMissionCards = () => {
+			cards.forEach((card, index) => {
+				window.setTimeout(() => {
+					card.classList.add('is-visible');
+				}, index * 220);
+			});
+		};
+
+		if (!('IntersectionObserver' in window)) {
+			revealMissionCards();
+		} else {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						revealMissionCards();
+						observer.disconnect();
+					}
+				},
+				{ threshold: 0.28, rootMargin: '0px 0px -10% 0px' },
+			);
+
+			observer.observe(missionVisionSection);
+		}
+	}
+</script>

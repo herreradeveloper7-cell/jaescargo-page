@@ -7,7 +7,8 @@ const containerClass = 'mx-auto w-full max-w-[1180px] px-6 max-[760px]:px-[18px]
 const footerLinkClass =
 	'inline-flex w-fit text-[0.92rem] font-semibold text-white/78 no-underline transition-colors duration-200 hover:text-white';
 const iconWrapClass =
-	'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]';
+	'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/18 bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition-[background,border-color,box-shadow,transform] duration-200 group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:border-white/45 group-hover:bg-white/18 group-hover:shadow-[0_14px_28px_rgba(45,45,45,0.22),0_0_0_4px_rgba(255,255,255,0.08),inset_0_1px_0_rgba(255,255,255,0.18)]';
+const iconClass = 'transition-transform duration-200 group-hover:rotate-6 group-hover:scale-110';
 ---
 
 <footer class="relative overflow-hidden bg-[linear-gradient(180deg,var(--color-primary)_0%,#760000_46%,var(--color-primary-dark)_100%)] text-white">
@@ -27,7 +28,7 @@ const iconWrapClass =
 				</a>
 				<p class="mt-5 max-w-[340px] text-[0.92rem] leading-[1.75] text-white/78">
 					Soluciones de casillero virtual, courier, exportaciones y correo especializado
-					con acompanamiento claro en cada envio.
+					con acompañamiento claro en cada envio.
 				</p>
 			</div>
 
@@ -36,7 +37,6 @@ const iconWrapClass =
 				<div class="mt-5 flex flex-col gap-3">
 					<a class={footerLinkClass} href="/">Inicio</a>
 					<a class={footerLinkClass} href="/servicios">Servicios</a>
-					<a class={footerLinkClass} href="/#como-funciona">Como funciona</a>
 					<a class={footerLinkClass} href="/nosotros">Nosotros</a>
 				</div>
 			</nav>
@@ -44,9 +44,9 @@ const iconWrapClass =
 			<nav aria-label="Servicios del footer">
 				<h2 class="font-heading text-[1rem] font-extrabold text-white">Servicios</h2>
 				<div class="mt-5 flex flex-col gap-3">
-					<a class={footerLinkClass} href="/servicios">Casillero virtual</a>
-					<a class={footerLinkClass} href="/personal-shopper">Personal shopper</a>
-					<a class={footerLinkClass} href="/servicios">Exportaciones</a>
+					<a class={footerLinkClass} href="/servicios#casillero">Casillero virtual</a>
+					<a class={footerLinkClass} href="/servicios#shopper">Personal shopper</a>
+					<a class={footerLinkClass} href="/servicios#exportaciones">Exportaciones</a>
 					<a class={footerLinkClass} href="https://wolfbox.app/register">Crear casillero</a>
 				</div>
 			</nav>
@@ -56,7 +56,7 @@ const iconWrapClass =
 				<div class="mt-5 flex flex-col gap-4">
 					<a class="group grid grid-cols-[40px_1fr] items-center gap-3 text-white no-underline" href="https://wa.me/?text=Hola%20JAES%20Cargo%2C%20quiero%20mas%20informacion" target="_blank" rel="noreferrer">
 						<span class={iconWrapClass}>
-							<Phone size={19} stroke-width={2.2} aria-hidden="true" />
+							<Phone class={iconClass} size={19} stroke-width={2.2} aria-hidden="true" />
 						</span>
 						<span class="text-[0.92rem] font-semibold text-white/78 transition-colors duration-200 group-hover:text-white">
 							Contactanos por WhatsApp
@@ -64,15 +64,15 @@ const iconWrapClass =
 					</a>
 					<a class="group grid grid-cols-[40px_1fr] items-center gap-3 text-white no-underline" href="mailto:info@jaescargo.com">
 						<span class={iconWrapClass}>
-							<Mail size={19} stroke-width={2.2} aria-hidden="true" />
+							<Mail class={iconClass} size={19} stroke-width={2.2} aria-hidden="true" />
 						</span>
 						<span class="text-[0.92rem] font-semibold text-white/78 transition-colors duration-200 group-hover:text-white">
 							info@jaescargo.com
 						</span>
 					</a>
-					<div class="grid grid-cols-[40px_1fr] items-center gap-3">
+					<div class="group grid grid-cols-[40px_1fr] items-center gap-3">
 						<span class={iconWrapClass}>
-							<MapPin size={19} stroke-width={2.2} aria-hidden="true" />
+							<MapPin class={iconClass} size={19} stroke-width={2.2} aria-hidden="true" />
 						</span>
 						<span class="text-[0.92rem] font-semibold text-white/78">
 							AV CRA 80 # 2-51/
@@ -89,7 +89,7 @@ const iconWrapClass =
 			</p>
 			<a
 				class="group inline-flex items-center gap-2 rounded-lg border border-white/18 bg-white/10 px-4 py-2.5 font-heading text-[0.82rem] font-extrabold text-white no-underline transition-[background,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/14"
-				href="/#contacto"
+				href="#cotizador"
 			>
 				Cotizar envio
 				<Send class="transition-transform duration-200 group-hover:translate-x-0.5" size={17} stroke-width={2.3} aria-hidden="true" />

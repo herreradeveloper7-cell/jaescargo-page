@@ -1,13 +1,101 @@
 ---
+import { CheckCircle2, MessageCircle, PackageCheck, Plane, Send, ShieldAlert, ShoppingBag } from '@lucide/astro';
 import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 import CtaSection from '../components/CtaSection.astro';
 
 const containerClass = 'mx-auto w-full max-w-[1180px] px-6 max-[760px]:px-[18px]';
-const buttonPrimary =
-	'inline-flex min-h-[46px] items-center justify-center rounded-md border border-primary bg-primary px-[18px] py-3 font-heading text-[0.9rem] font-bold text-white no-underline transition-[background,border-color,color,transform] duration-[180ms] hover:-translate-y-px hover:bg-primary-dark';
-const buttonOutline =
-	'inline-flex min-h-[46px] items-center justify-center rounded-md border border-border bg-white px-[18px] py-3 font-heading text-[0.9rem] font-bold text-secondary no-underline transition-[background,border-color,color,transform] duration-[180ms] hover:-translate-y-px hover:border-primary hover:text-primary';
+const contactUrl = 'https://wa.me/?text=Hola%20JAES%20Cargo%2C%20quiero%20mas%20informacion%20sobre%20sus%20servicios';
+const serviceButtonClass =
+	'group/service-btn absolute flex h-[126px] w-[126px] -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-center justify-center gap-2 rounded-full border border-border bg-white p-4 text-center font-heading text-[0.82rem] font-extrabold leading-[1.15] text-secondary shadow-[0_18px_40px_rgba(45,45,45,0.12)] transition-[background,border-color,box-shadow,color,transform] duration-300 hover:scale-105 hover:border-primary/35 hover:text-primary hover:shadow-[0_24px_54px_rgba(45,45,45,0.16),0_0_0_6px_rgba(139,0,0,0.06)] [&.is-active]:scale-110 [&.is-active]:border-primary [&.is-active]:bg-primary [&.is-active]:text-white [&.is-active]:shadow-[0_28px_62px_rgba(139,0,0,0.24),0_0_0_8px_rgba(139,0,0,0.08)] max-[760px]:static max-[760px]:h-auto max-[760px]:w-full max-[760px]:translate-x-0 max-[760px]:translate-y-0 max-[760px]:flex-row max-[760px]:justify-start max-[760px]:rounded-lg max-[760px]:px-5 max-[760px]:py-4 max-[760px]:text-left max-[760px]:[&.is-active]:scale-100';
+const serviceIconClass =
+	'inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface text-primary transition-[background,border-color,color,transform] duration-300 group-hover/service-btn:scale-105 group-hover/service-btn:border-primary/30 group-[.is-active]/service-btn:border-white/30 group-[.is-active]/service-btn:bg-white/14 group-[.is-active]/service-btn:text-white';
+const actionButtonClass =
+	'group relative inline-flex min-h-12 items-center justify-center gap-2.5 overflow-hidden rounded-lg border border-primary bg-[linear-gradient(135deg,rgba(255,255,255,0.14),transparent_34%)] bg-primary px-5 py-3 font-heading text-[0.86rem] font-extrabold text-white no-underline shadow-[0_14px_28px_rgba(139,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.18)] transition-[border-color,box-shadow,transform] duration-[180ms] before:absolute before:inset-0 before:-translate-x-[120%] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.28),transparent)] before:transition-transform before:duration-[420ms] hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_18px_34px_rgba(139,0,0,0.24),0_0_0_4px_rgba(139,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.22)] hover:before:translate-x-[120%]';
+const secondaryActionButtonClass =
+	'group relative inline-flex min-h-12 items-center justify-center gap-2.5 overflow-hidden rounded-lg border border-secondary bg-[linear-gradient(135deg,rgba(255,255,255,0.12),transparent_34%)] bg-secondary px-5 py-3 font-heading text-[0.86rem] font-extrabold text-white no-underline shadow-[0_14px_28px_rgba(45,45,45,0.18),inset_0_1px_0_rgba(255,255,255,0.14)] transition-[border-color,box-shadow,transform] duration-[180ms] before:absolute before:inset-0 before:-translate-x-[120%] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.24),transparent)] before:transition-transform before:duration-[420ms] hover:-translate-y-0.5 hover:border-secondary hover:shadow-[0_18px_34px_rgba(45,45,45,0.24),0_0_0_4px_rgba(45,45,45,0.08),inset_0_1px_0_rgba(255,255,255,0.2)] hover:before:translate-x-[120%]';
+const storeCardClass =
+	'group flex min-h-[184px] translate-y-8 scale-[0.96] flex-col items-center justify-center rounded-lg border border-border bg-white p-6 text-center opacity-0 shadow-[0_18px_42px_rgba(45,45,45,0.08)] transition-[opacity,border-color,box-shadow,transform] duration-[760ms] ease-out [&.is-visible]:translate-y-0 [&.is-visible]:scale-100 [&.is-visible]:opacity-100 [&.is-visible]:animate-fade-in-up [&.is-visible]:animate-duration-[760ms] [&.is-visible]:animate-fill-mode-both [&.is-visible]:animate-bezier-quart-out hover:-translate-y-1.5 hover:border-primary/25 hover:shadow-[0_24px_54px_rgba(45,45,45,0.13),0_0_0_1px_rgba(139,0,0,0.08)]';
+
+const suggestedStores = [
+	{ name: 'Amazon', logo: '/images/Amazon_logo.svg.webp', url: 'https://www.amazon.com', logoClass: 'max-h-12 max-w-[150px]' },
+	{ name: 'Shein', logo: '/images/Shein-logo.webp', url: 'https://www.shein.com', logoClass: 'max-h-12 max-w-[150px]' },
+	{ name: 'Newegg', logo: '/images/Newegg_logo.webp', url: 'https://www.newegg.com', logoClass: 'max-h-12 max-w-[150px]' },
+	{ name: 'Jomashop', logo: '/images/Jomashop-Logo.webp', url: 'https://www.jomashop.com', logoClass: 'max-h-12 max-w-[150px]' },
+	{ name: 'Walmart', logo: '/images/Walmart-Logo.webp', url: 'https://www.walmart.com', logoClass: 'max-h-16 max-w-[175px]' },
+	{ name: 'StockX', logo: '/images/StockX_logo.webp', url: 'https://stockx.com', logoClass: 'max-h-12 max-w-[150px]' },
+	{ name: 'Target', logo: '/images/Target_logo.webp', url: 'https://www.target.com', logoClass: 'max-h-[4.6rem] max-w-[170px]' },
+	{ name: 'Ebay', logo: '/images/Ebay_logo.webp', url: 'https://www.ebay.com', logoClass: 'max-h-16 max-w-[175px]' },
+];
+
+const services = [
+	{
+		id: 'casillero',
+		label: 'Casillero virtual',
+		eyebrow: 'Compras internacionales',
+		title: 'Tu direccion internacional para recibir, consolidar y enviar.',
+		description:
+			'Recibe tus compras en una direccion confiable, consolida paquetes y coordina el envio hacia tu destino con seguimiento claro.',
+		offering:
+			'Ideal para clientes que compran en tiendas de USA y necesitan una operacion organizada, trazable y acompañada de inicio a fin.',
+		conditions: [
+			'El usuario debe registrarse para recibir su direccion asignada.',
+			'Los paquetes deben estar correctamente identificados con los datos del casillero.',
+			'Los tiempos de entrega dependen de tienda, transportadora y procesos aduaneros.',
+		],
+		restrictions: [
+			'No se reciben articulos prohibidos por aerolineas, aduana o normativas internacionales.',
+			'Productos fragiles, liquidos, baterias o mercancias reguladas pueden requerir validacion previa.',
+			'Costos de impuestos, aranceles o manejos especiales no estan incluidos automaticamente.',
+		],
+		position: 'left-1/2 top-[8%]',
+		Icon: PackageCheck,
+	},
+	{
+		id: 'exportaciones',
+		label: 'Exportaciones',
+		eyebrow: 'Envios al exterior',
+		title: 'Movemos tus productos hacia otros mercados con respaldo.',
+		description:
+			'Acompañamos a empresas y emprendedores en el envio de productos al exterior, cuidando documentacion, tiempos y coordinacion logistica.',
+		offering:
+			'Una solucion pensada para enviar con orden, reducir dudas en el proceso y contar con apoyo especializado cuando el envio lo necesita.',
+		conditions: [
+			'El remitente debe suministrar informacion clara del producto, destino y valor declarado.',
+			'Puede requerirse factura comercial, descripcion de mercancia y datos completos del destinatario.',
+			'La tarifa final depende de peso, medidas, destino y tipo de producto.',
+		],
+		restrictions: [
+			'No se gestionan mercancias prohibidas o restringidas sin validacion documental previa.',
+			'Algunos destinos pueden exigir permisos, certificaciones o procesos aduaneros adicionales.',
+			'Los tiempos de transito pueden variar por controles de aduana o condiciones del operador logistico.',
+		],
+		position: 'left-[88%] top-[68%]',
+		Icon: Plane,
+	},
+	{
+		id: 'shopper',
+		label: 'Personal shopper',
+		eyebrow: 'Compramos por ti',
+		title: 'Si no puedes comprar directo, nuestro equipo compra por ti.',
+		description:
+			'Te ayudamos a cotizar, comprar y coordinar productos en tiendas internacionales para que recibas lo que necesitas sin complicarte.',
+		offering:
+			'Perfecto para quienes no tienen tarjeta internacional, necesitan apoyo en la compra o quieren una gestion mas guiada.',
+		conditions: [
+			'El cliente debe enviar enlaces, referencias, tallas, colores y cantidades exactas del producto.',
+			'La compra se realiza despues de confirmar disponibilidad, costos y forma de pago.',
+			'Cambios de precio, inventario o politicas de tienda pueden modificar la cotizacion inicial.',
+		],
+		restrictions: [
+			'No se compran productos prohibidos, falsificados o restringidos para transporte internacional.',
+			'Garantias, devoluciones o cambios dependen de las politicas de la tienda donde se compre.',
+			'Productos con alto riesgo, fragilidad o regulacion especial pueden requerir aprobacion previa.',
+		],
+		position: 'left-[12%] top-[68%]',
+		Icon: ShoppingBag,
+	},
+];
 ---
 
 <Layout
@@ -16,43 +104,282 @@ const buttonOutline =
 >
 	<Header />
 	<main>
-		<section class="bg-surface py-[88px] pb-[72px]">
+		<section class="bg-[linear-gradient(90deg,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.76)_48%,rgba(255,255,255,0.28)_100%),url('/images/hero_services.webp')] bg-cover bg-center py-[72px] pb-[60px] max-[760px]:bg-[linear-gradient(90deg,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.78)_100%),url('/images/hero_services.webp')] max-[760px]:py-14">
 			<div class={containerClass}>
 				<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-primary">
 					Servicios
 				</span>
-				<h1 class="mt-3 max-w-[860px] font-heading text-[clamp(2.2rem,5vw,4.5rem)] leading-[1.08] text-secondary">
-					Casillero virtual y exportaciones con una operacion clara de inicio a fin.
+				<h1 class="mt-3 max-w-[700px] font-heading text-[clamp(2rem,3.9vw,3.55rem)] font-extrabold leading-[1.08] text-secondary">
+					Soluciones <span class="text-primary">logísticas</span> internacionales.
 				</h1>
+				<span class="mt-5 block h-[3px] w-[72px] rounded-full bg-primary"></span>
 				<p class="mt-[18px] max-w-[680px] text-[1.04rem] leading-[1.7] text-muted">
-					Centralizamos soluciones para traer compras, mover paquetes y acompanar envios
-					internacionales con procesos organizados.
+					Elige el servicio que necesitas y conoce como podemos ayudarte a mover tus compras,
+					paquetes o productos internacionales con claridad.
 				</p>
 			</div>
 		</section>
 
-		<section class="py-[88px] max-[760px]:py-16">
-			<div class={`${containerClass} grid grid-cols-2 gap-[22px] max-[760px]:grid-cols-1`}>
-				<article class="rounded-lg border border-border p-[34px]">
-					<span class="font-heading font-extrabold text-primary">01</span>
-					<h2 class="mt-3.5 font-heading text-[1.8rem] text-secondary">Casillero virtual</h2>
-					<p class="my-4 mb-7 leading-[1.7] text-muted">
-						Recibe tus compras internacionales en una direccion asignada, consolida paquetes y
-						gestiona el envio hacia tu destino con seguimiento.
+		<section class="overflow-hidden bg-white py-[72px] max-[760px]:py-14" aria-label="Selector de servicios">
+			<div class={`${containerClass} grid grid-cols-[0.95fr_1.05fr] items-center gap-12 max-[980px]:grid-cols-1`}>
+				<div>
+					<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-primary">
+						Explora nuestros servicios
+					</span>
+					<h2 class="mt-2 max-w-[520px] font-heading text-[clamp(1.65rem,2.5vw,2.65rem)] font-extrabold leading-[1.1] text-secondary">
+						Selecciona un servicio y mira el detalle al instante.
+					</h2>
+					<div class="mt-5 flex items-center gap-3" aria-hidden="true">
+						<span class="block h-[3px] w-[72px] rounded-full bg-primary"></span>
+					</div>
+					<p class="mt-5 max-w-[500px] text-[0.96rem] leading-[1.75] text-muted">
+						Esta rueda interactiva te permite cambiar entre nuestras soluciones principales
+						de forma rapida, visual y ordenada.
 					</p>
-					<a class={buttonPrimary} href="https://wolfbox.app/register">Crear casillero</a>
-				</article>
-				<article class="rounded-lg border border-border p-[34px]">
-					<span class="font-heading font-extrabold text-primary">02</span>
-					<h2 class="mt-3.5 font-heading text-[1.8rem] text-secondary">Exportaciones</h2>
-					<p class="my-4 mb-7 leading-[1.7] text-muted">
-						Acompanamos a empresas y emprendedores en el envio de productos al exterior, cuidando
-						documentacion, tiempos y coordinacion logistica.
-					</p>
-					<a class={buttonOutline} href="/">Solicitar informacion</a>
-				</article>
+				</div>
+
+				<div
+					class="relative mx-auto aspect-square w-full max-w-[480px] rounded-full border border-border bg-[radial-gradient(circle_at_50%_50%,var(--color-white)_0%,var(--color-surface)_52%,rgba(139,0,0,0.08)_100%)] shadow-[0_28px_70px_rgba(45,45,45,0.12)] animate-float animate-duration-[5200ms] animate-iteration-count-infinite animate-ease-in-out max-[760px]:flex max-[760px]:aspect-auto max-[760px]:max-w-none max-[760px]:flex-col max-[760px]:gap-3 max-[760px]:rounded-none max-[760px]:border-0 max-[760px]:bg-transparent max-[760px]:shadow-none max-[760px]:animate-none"
+					data-service-wheel
+				>
+					<div class="absolute inset-[18%] rounded-full border border-dashed border-primary/28 max-[760px]:hidden" aria-hidden="true"></div>
+					<div class="absolute inset-[32%] rounded-full bg-[linear-gradient(180deg,var(--color-primary),var(--color-primary-dark))] shadow-[0_22px_48px_rgba(139,0,0,0.22)] max-[760px]:hidden" aria-hidden="true"></div>
+					<div class="absolute left-1/2 top-1/2 flex h-[118px] w-[118px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-primary text-center font-heading text-[0.82rem] font-extrabold uppercase leading-[1.25] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] max-[760px]:hidden">
+						JAES<br />Cargo
+					</div>
+
+					{
+						services.map(({ id, label, position, Icon }, index) => (
+							<button
+								class={`${serviceButtonClass} ${position} animate-pop animate-duration-[700ms] animate-fill-mode-both animate-bezier-quart-out ${index === 1 ? 'animate-delay-[160ms]' : ''} ${index === 2 ? 'animate-delay-[320ms]' : ''}`}
+								type="button"
+								data-service-trigger={id}
+								aria-pressed="false"
+							>
+								<span class={serviceIconClass}>
+									<Icon size={24} stroke-width={2.25} aria-hidden="true" />
+								</span>
+								<span>{label}</span>
+							</button>
+						))
+					}
+				</div>
 			</div>
 		</section>
+
+		<section class="hidden bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.16)_0%,transparent_34%),linear-gradient(180deg,var(--color-primary)_0%,var(--color-primary-dark)_100%)] py-[72px] text-white max-[760px]:py-14" aria-label="Detalle del servicio seleccionado" data-service-detail-section>
+			<div class={containerClass}>
+				{
+					services.map(({ id, eyebrow, title, description, offering, conditions, restrictions, Icon }) => (
+						<article
+							class="hidden rounded-lg border border-white/18 bg-white p-7 text-secondary shadow-[0_28px_70px_rgba(45,45,45,0.22)] transition-[opacity,transform] duration-500 max-[560px]:p-5"
+							data-service-panel={id}
+						>
+							<div class="grid grid-cols-[0.82fr_1.18fr] gap-7 max-[900px]:grid-cols-1">
+								<div class="rounded-lg bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-primary-dark)_100%)] p-7 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
+									<div class="inline-flex h-[78px] w-[78px] items-center justify-center rounded-full border border-white/22 bg-white/12 shadow-[0_18px_38px_rgba(45,45,45,0.22)]">
+										<Icon size={40} stroke-width={1.9} aria-hidden="true" />
+									</div>
+									<span class="mt-6 block font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-white/78">
+										{eyebrow}
+									</span>
+									<h2 class="mt-3 font-heading text-[clamp(1.55rem,2.35vw,2.35rem)] font-extrabold leading-[1.12] text-white">
+										{title}
+									</h2>
+									<span class="mt-5 block h-[3px] w-[72px] rounded-full bg-white"></span>
+									<p class="mt-5 text-[0.95rem] leading-[1.75] text-white/82">
+										{description}
+									</p>
+								</div>
+
+								<div class="grid gap-5">
+									<div class="rounded-lg border border-border bg-surface p-6">
+										<h3 class="font-heading text-[1.05rem] font-extrabold text-secondary">Que ofrecemos</h3>
+										<p class="mt-3 text-[0.93rem] leading-[1.75] text-muted">{offering}</p>
+									</div>
+
+									<div class="grid grid-cols-2 gap-5 max-[760px]:grid-cols-1">
+										<div class="rounded-lg border border-border bg-white p-6 shadow-[0_14px_32px_rgba(45,45,45,0.06)]">
+											<div class="flex items-center gap-3">
+												<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+													<CheckCircle2 size={21} stroke-width={2.2} aria-hidden="true" />
+												</span>
+												<h3 class="font-heading text-[1rem] font-extrabold text-secondary">Condiciones</h3>
+											</div>
+											<ul class="mt-4 space-y-3">
+												{conditions.map((condition) => (
+													<li class="grid grid-cols-[10px_1fr] gap-3 text-[0.88rem] leading-[1.65] text-muted">
+														<span class="mt-2 h-1.5 w-1.5 rounded-full bg-primary"></span>
+														<span>{condition}</span>
+													</li>
+												))}
+											</ul>
+										</div>
+
+										<div class="rounded-lg border border-border bg-white p-6 shadow-[0_14px_32px_rgba(45,45,45,0.06)]">
+											<div class="flex items-center gap-3">
+												<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-secondary/10 text-secondary">
+													<ShieldAlert size={21} stroke-width={2.2} aria-hidden="true" />
+												</span>
+												<h3 class="font-heading text-[1rem] font-extrabold text-secondary">Restricciones</h3>
+											</div>
+											<ul class="mt-4 space-y-3">
+												{restrictions.map((restriction) => (
+													<li class="grid grid-cols-[10px_1fr] gap-3 text-[0.88rem] leading-[1.65] text-muted">
+														<span class="mt-2 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+														<span>{restriction}</span>
+													</li>
+												))}
+											</ul>
+										</div>
+									</div>
+
+									<div class="flex flex-wrap gap-3">
+										<a class={`${actionButtonClass} w-fit max-[560px]:w-full`} href={contactUrl} target="_blank" rel="noreferrer">
+											<span class="relative z-10">Contactar ahora</span>
+											<MessageCircle class="relative z-10 transition-transform duration-200 group-hover:translate-x-0.5" size={19} stroke-width={2.4} aria-hidden="true" />
+										</a>
+										{
+											id === 'casillero' && (
+												<>
+													<a class={`${actionButtonClass} w-fit max-[560px]:w-full`} href="#cotizador">
+														<span class="relative z-10">Cotizar envio</span>
+														<Send class="relative z-10 transition-transform duration-200 group-hover:translate-x-0.5" size={19} stroke-width={2.4} aria-hidden="true" />
+													</a>
+													<a class={`${secondaryActionButtonClass} w-fit max-[560px]:w-full`} href="https://wolfbox.app/register">
+														<span class="relative z-10">Crea tu casillero</span>
+														<PackageCheck class="relative z-10 transition-transform duration-200 group-hover:translate-x-0.5" size={19} stroke-width={2.4} aria-hidden="true" />
+													</a>
+												</>
+											)
+										}
+									</div>
+								</div>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="bg-surface py-[72px] max-[760px]:py-14" aria-label="Tiendas sugeridas">
+			<div class={containerClass}>
+				<div class="mx-auto max-w-[760px] text-center">
+					<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-primary">
+						Tiendas sugeridas
+					</span>
+					<h2 class="mt-2 font-heading text-[clamp(1.7rem,2.6vw,2.75rem)] font-extrabold leading-[1.1] text-secondary">
+						Compra en tus tiendas favoritas de Estados Unidos.
+					</h2>
+					<div class="mt-5 flex items-center justify-center gap-3" aria-hidden="true">
+						<span class="block h-[3px] w-[72px] rounded-full bg-primary"></span>
+					</div>
+					<p class="mx-auto mt-5 max-w-[620px] text-[0.96rem] leading-[1.75] text-muted">
+						Estas son algunas tiendas donde puedes comprar y usar tu casillero para recibir,
+						consolidar y enviar tus productos.
+					</p>
+				</div>
+
+				<div class="mt-12 grid grid-cols-4 gap-6 max-[980px]:grid-cols-3 max-[760px]:grid-cols-2 max-[520px]:grid-cols-1" data-store-grid>
+					{
+						suggestedStores.map(({ name, logo, url, logoClass }) => (
+							<a class={storeCardClass} href={url} target="_blank" rel="noreferrer" aria-label={`Visitar ${name}`} data-store-card>
+								<div class="flex h-20 w-full items-center justify-center">
+									<img
+										class:list={[
+											'object-contain transition-transform duration-200 group-hover:scale-105',
+											logoClass,
+										]}
+										src={logo}
+										alt={`Logo de ${name}`}
+										loading="lazy"
+									/>
+								</div>
+								<h3 class="mt-7 font-heading text-[1.08rem] font-extrabold text-primary">{name}</h3>
+							</a>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
 		<CtaSection />
 	</main>
 </Layout>
+
+<script>
+	const serviceTriggers = Array.from(document.querySelectorAll<HTMLElement>('[data-service-trigger]'));
+	const servicePanels = Array.from(document.querySelectorAll<HTMLElement>('[data-service-panel]'));
+	const serviceDetailSection = document.querySelector<HTMLElement>('[data-service-detail-section]');
+	const storeGrid = document.querySelector<HTMLElement>('[data-store-grid]');
+	const serviceIds = serviceTriggers
+		.map((trigger) => trigger.getAttribute('data-service-trigger'))
+		.filter((serviceId): serviceId is string => Boolean(serviceId));
+
+	if (storeGrid) {
+		const storeCards = Array.from(storeGrid.querySelectorAll<HTMLElement>('[data-store-card]'));
+		const revealStores = () => {
+			storeCards.forEach((card, index) => {
+				window.setTimeout(() => {
+					card.classList.add('is-visible');
+				}, index * 120);
+			});
+		};
+
+		if (!('IntersectionObserver' in window)) {
+			revealStores();
+		} else {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						revealStores();
+						observer.disconnect();
+					}
+				},
+				{ threshold: 0.18, rootMargin: '0px 0px -10% 0px' },
+			);
+
+			observer.observe(storeGrid);
+		}
+	}
+
+	const showService = (serviceId: string) => {
+		if (!serviceIds.includes(serviceId)) return;
+		serviceDetailSection?.classList.remove('hidden');
+
+		serviceTriggers.forEach((trigger) => {
+			const isActive = trigger.getAttribute('data-service-trigger') === serviceId;
+			trigger.classList.toggle('is-active', isActive);
+			trigger.setAttribute('aria-pressed', String(isActive));
+		});
+
+		servicePanels.forEach((panel) => {
+			const isActive = panel.getAttribute('data-service-panel') === serviceId;
+			panel.classList.toggle('hidden', !isActive);
+			if (isActive) {
+				panel.classList.add('animate-blurred-fade-in', 'animate-duration-[760ms]', 'animate-fill-mode-both', 'animate-bezier-quart-out');
+				window.setTimeout(() => {
+					panel.classList.remove('animate-blurred-fade-in', 'animate-duration-[760ms]', 'animate-fill-mode-both', 'animate-bezier-quart-out');
+				}, 800);
+			}
+		});
+	};
+
+	serviceTriggers.forEach((trigger) => {
+		trigger.addEventListener('click', () => {
+			const serviceId = trigger.getAttribute('data-service-trigger');
+			if (!serviceId) return;
+			showService(serviceId);
+			window.history.replaceState(null, '', `#${serviceId}`);
+		});
+	});
+
+	const showServiceFromHash = () => {
+		const serviceId = window.location.hash.replace('#', '');
+		if (!serviceId) return;
+		showService(serviceId);
+	};
+
+	showServiceFromHash();
+	window.addEventListener('hashchange', showServiceFromHash);
+</script>

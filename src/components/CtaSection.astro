@@ -1,17 +1,21 @@
 ---
 import { MessageCircle, Send } from '@lucide/astro';
 
-const quoteUrl = '/#contacto';
+const quoteUrl = '#cotizador';
 const contactUrl = 'https://wa.me/?text=Hola%20JAES%20Cargo%2C%20quiero%20mas%20informacion';
 
 const containerClass = 'mx-auto w-full max-w-[1180px] px-6 max-[760px]:px-[18px]';
 const buttonBase =
 	'group relative inline-flex min-h-12 items-center justify-center gap-2.5 overflow-hidden rounded-lg px-5 py-3 font-heading text-[0.86rem] font-extrabold no-underline transition-[border-color,box-shadow,transform] duration-200 before:absolute before:inset-0 before:-translate-x-[120%] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.32),transparent)] before:transition-transform before:duration-[420ms] hover:-translate-y-0.5 hover:before:translate-x-[120%] max-[560px]:w-full';
 const iconClass = 'relative z-10 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5';
+const ctaRevealClass =
+	'group/cta-button translate-y-6 scale-95 opacity-0 transition-[opacity,transform] duration-[720ms] ease-out [&.is-visible]:translate-y-0 [&.is-visible]:scale-100 [&.is-visible]:opacity-100 [&.is-visible]:animate-bounce-fade-in [&.is-visible]:animate-duration-[720ms] [&.is-visible]:animate-fill-mode-both [&.is-visible]:animate-bezier-quart-out';
+const ctaPulseClass =
+	'flex motion-reduce:animate-none max-[560px]:w-full group-[.is-visible]/cta-button:animate-float group-[.is-visible]/cta-button:animate-duration-[2600ms] group-[.is-visible]/cta-button:animate-iteration-count-infinite group-[.is-visible]/cta-button:animate-ease-in-out';
 ---
 
 <section
-	class="relative overflow-hidden border-y border-border bg-white py-[72px] text-secondary max-[760px]:py-14"
+	class="relative overflow-hidden border-y border-border bg-white py-[64px] text-secondary max-[760px]:py-14"
 	aria-label="Llamado a la accion"
 >
 	<div class={`${containerClass} relative z-10 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-10 max-[900px]:grid-cols-1 max-[900px]:gap-7`}>
@@ -19,7 +23,7 @@ const iconClass = 'relative z-10 shrink-0 transition-transform duration-200 grou
 			<span class="font-heading text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-primary">
 				Listos para ayudarte
 			</span>
-			<h2 class="mt-3 max-w-[620px] font-heading text-[clamp(1.8rem,2.7vw,3rem)] font-extrabold leading-[1.12] text-secondary">
+			<h2 class="mt-3 max-w-[600px] font-heading text-[clamp(1.6rem,2.25vw,2.45rem)] font-extrabold leading-[1.12] text-secondary">
 				Mueve tu carga con un equipo que te acompaña en cada paso.
 			</h2>
 			<p class="mt-4 max-w-[560px] text-[0.95rem] leading-[1.7] text-muted">
@@ -28,23 +32,63 @@ const iconClass = 'relative z-10 shrink-0 transition-transform duration-200 grou
 			</p>
 		</div>
 
-		<div class="flex flex-wrap justify-end gap-3 max-[900px]:justify-start max-[560px]:grid max-[560px]:w-full max-[560px]:grid-cols-1">
-			<a
-				class={`${buttonBase} border border-primary bg-[linear-gradient(135deg,rgba(255,255,255,0.16),transparent_36%)] bg-primary text-white shadow-[0_14px_28px_rgba(139,0,0,0.26),inset_0_1px_0_rgba(255,255,255,0.18)] hover:border-primary hover:shadow-[0_18px_34px_rgba(139,0,0,0.32),0_0_0_4px_rgba(139,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.22)]`}
-				href={quoteUrl}
-			>
-				<span class="relative z-10">Cotizar ahora</span>
-				<Send class={iconClass} size={19} stroke-width={2.4} aria-hidden="true" />
-			</a>
-			<a
-				class={`${buttonBase} border border-secondary/20 bg-secondary text-white shadow-[0_14px_28px_rgba(45,45,45,0.18),inset_0_1px_0_rgba(255,255,255,0.14)] hover:border-secondary hover:bg-secondary hover:shadow-[0_18px_34px_rgba(45,45,45,0.24),0_0_0_4px_rgba(45,45,45,0.08),inset_0_1px_0_rgba(255,255,255,0.2)]`}
-				href={contactUrl}
-				target="_blank"
-				rel="noreferrer"
-			>
-				<span class="relative z-10">Contactanos ahora</span>
-				<MessageCircle class={iconClass} size={20} stroke-width={2.4} aria-hidden="true" />
-			</a>
+		<div class="flex flex-wrap justify-end gap-3 max-[900px]:justify-start max-[560px]:grid max-[560px]:w-full max-[560px]:grid-cols-1" data-cta-actions>
+			<div class={ctaRevealClass} data-cta-button>
+				<div class={ctaPulseClass}>
+					<a
+						class={`${buttonBase} border border-primary bg-[linear-gradient(135deg,rgba(255,255,255,0.16),transparent_36%)] bg-primary text-white shadow-[0_14px_28px_rgba(139,0,0,0.26),inset_0_1px_0_rgba(255,255,255,0.18)] hover:border-primary hover:shadow-[0_18px_34px_rgba(139,0,0,0.32),0_0_0_4px_rgba(139,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.22)]`}
+						href={quoteUrl}
+					>
+						<span class="relative z-10">Cotizar ahora</span>
+						<Send class={iconClass} size={19} stroke-width={2.4} aria-hidden="true" />
+					</a>
+				</div>
+			</div>
+			<div class={ctaRevealClass} data-cta-button>
+				<div class={`${ctaPulseClass} group-[.is-visible]/cta-button:animate-delay-[420ms]`}>
+					<a
+						class={`${buttonBase} border border-secondary/20 bg-secondary text-white shadow-[0_14px_28px_rgba(45,45,45,0.18),inset_0_1px_0_rgba(255,255,255,0.14)] hover:border-secondary hover:bg-secondary hover:shadow-[0_18px_34px_rgba(45,45,45,0.24),0_0_0_4px_rgba(45,45,45,0.08),inset_0_1px_0_rgba(255,255,255,0.2)]`}
+						href={contactUrl}
+						target="_blank"
+						rel="noreferrer"
+					>
+						<span class="relative z-10">Contactanos ahora</span>
+						<MessageCircle class={iconClass} size={20} stroke-width={2.4} aria-hidden="true" />
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
+
+<script>
+	const ctaActionGroups = document.querySelectorAll('[data-cta-actions]');
+
+	ctaActionGroups.forEach((group) => {
+		const buttons = Array.from(group.querySelectorAll('[data-cta-button]'));
+		const revealButtons = () => {
+			buttons.forEach((button, index) => {
+				window.setTimeout(() => {
+					button.classList.add('is-visible');
+				}, index * 180);
+			});
+		};
+
+		if ('IntersectionObserver' in window) {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (!entry.isIntersecting) return;
+						revealButtons();
+						observer.unobserve(entry.target);
+					});
+				},
+				{ threshold: 0.45, rootMargin: '0px 0px -8% 0px' }
+			);
+
+			observer.observe(group);
+		} else {
+			revealButtons();
+		}
+	});
+</script>
