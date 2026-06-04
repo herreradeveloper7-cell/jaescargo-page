@@ -30,7 +30,11 @@ const navLinkActiveClass = 'text-primary after:scale-x-100';
 const servicesActive = currentPath === '/servicios' || currentPath === '/personal-shopper';
 ---
 
-<header class="sticky top-0 z-20 border-b border-border bg-white shadow-[0_14px_36px_rgba(45,45,45,0.08)]">
+<header
+	class="sticky top-0 z-20 border-b border-border bg-white shadow-[0_14px_36px_rgba(45,45,45,0.08)] transition-transform duration-300 ease-out will-change-transform [transform:translateY(0)] data-[scroll-hidden=true]:[transform:translateY(-100%)] motion-reduce:transition-none"
+	data-site-header
+	data-scroll-hidden="false"
+>
 	<div
 		class={`${containerClass} grid min-h-[108px] grid-cols-[max-content_minmax(0,1fr)_max-content] items-center gap-[clamp(24px,3vw,44px)] max-[1440px]:min-h-[86px] max-[1440px]:gap-[clamp(20px,2.4vw,34px)] max-[980px]:min-h-0 max-[980px]:grid-cols-[max-content_max-content] max-[980px]:justify-between max-[980px]:gap-[18px] max-[980px]:py-4`}
 	>
@@ -117,24 +121,80 @@ const servicesActive = currentPath === '/servicios' || currentPath === '/persona
 </header>
 
 <script>
+	const siteHeader = document.querySelector<HTMLElement>('[data-site-header]');
 	const menuToggle = document.querySelector<HTMLElement>('[data-menu-toggle]');
 	const mobilePanels = document.querySelectorAll<HTMLElement>('[data-mobile-panel]');
+
+	const getScrollY = () =>
+		Math.max(
+			window.scrollY,
+			window.pageYOffset,
+			document.documentElement.scrollTop,
+			document.body.scrollTop,
+			document.scrollingElement?.scrollTop ?? 0,
+			0,
+		);
+
+	let lastScrollY = getScrollY();
+	let ticking = false;
+
+	const setHeaderHidden = (isHidden: boolean) => {
+		siteHeader?.setAttribute('data-scroll-hidden', String(isHidden));
+	};
+
+	const closeMobileMenu = () => {
+		menuToggle?.classList.remove('is-open');
+		menuToggle?.setAttribute('aria-expanded', 'false');
+		menuToggle?.setAttribute('aria-label', 'Abrir navegación');
+		mobilePanels.forEach((item) => item.classList.remove('is-open'));
+	};
+
+	const isMobileMenuOpen = () => menuToggle?.classList.contains('is-open') ?? false;
+
+	const updateHeaderVisibility = () => {
+		if (!siteHeader) return;
+
+		const currentScrollY = getScrollY();
+		const scrollDifference = currentScrollY - lastScrollY;
+
+		if (currentScrollY <= 24 || isMobileMenuOpen()) {
+			setHeaderHidden(false);
+			lastScrollY = currentScrollY;
+			return;
+		}
+
+		if (Math.abs(scrollDifference) >= 8) {
+			setHeaderHidden(scrollDifference > 0);
+			lastScrollY = currentScrollY;
+		}
+	};
+
+	const requestHeaderUpdate = () => {
+		if (ticking) return;
+
+		window.requestAnimationFrame(() => {
+			updateHeaderVisibility();
+			ticking = false;
+		});
+
+		ticking = true;
+	};
 
 	menuToggle?.addEventListener('click', () => {
 		const isOpen = menuToggle.classList.toggle('is-open');
 		menuToggle.setAttribute('aria-expanded', String(isOpen));
 		menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar navegación' : 'Abrir navegación');
+		setHeaderHidden(false);
 		mobilePanels.forEach((panel) => panel.classList.toggle('is-open', isOpen));
 	});
 
 	mobilePanels.forEach((panel) => {
 		panel.querySelectorAll('a').forEach((link) => {
 			link.addEventListener('click', () => {
-				menuToggle?.classList.remove('is-open');
-				menuToggle?.setAttribute('aria-expanded', 'false');
-				menuToggle?.setAttribute('aria-label', 'Abrir navegación');
-				mobilePanels.forEach((item) => item.classList.remove('is-open'));
+				closeMobileMenu();
 			});
 		});
 	});
+
+	window.addEventListener('scroll', requestHeaderUpdate, { passive: true });
 </script>
