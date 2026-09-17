@@ -1,46 +1,62 @@
-# Astro Starter Kit: Basics
+# JAES Cargo Website ✈️📦
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+Corporate website developed for **JAES Cargo Internacional**, focused on presenting the company's logistics and international shipping services through a modern, responsive and performance-oriented web experience.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-## 🚀 Project Structure
+## Overview
 
-Inside of your Astro project, you'll see the following folders and files:
+This project is the corporate website for JAES Cargo Internacional.
+
+The website was designed to provide a clear digital presence for the company, present its services and make it easier for customers to learn about the business and its logistics solutions.
+
+The project focuses on:
+
+- Corporate service presentation
+- Responsive design
+- Fast static page delivery
+- Reusable UI components
+- Clear navigation and content structure
+- Performance-oriented frontend development
+
+---
+
+## Key Features
+
+- 🌐 Corporate landing page
+- 📦 Logistics and shipping service presentation
+- 📱 Responsive design
+- ⚡ Static site generation
+- 🧩 Reusable Astro components
+- 🎨 Tailwind CSS styling
+- ✨ UI animations and interactions
+- 🧭 Structured navigation
+- 🚀 Performance-focused frontend
+
+---
+
+## Tech Stack
+
+- Astro 6
+- Tailwind CSS 4
+- JavaScript / TypeScript
+- Lucide Icons
+- pnpm
+
+---
+
+## Project Structure
 
 ```text
-/
+jaescargo-page/
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── layouts/
+│   ├── pages/
+│   └── styles/
+├── astro.config.mjs
+├── package.json
+├── pnpm-lock.yaml
+└── tsconfig.json
