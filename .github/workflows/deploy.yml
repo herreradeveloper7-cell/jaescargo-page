@@ -37,7 +37,8 @@ jobs:
       - name: Publish dist to Hostinger
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          # Hostinger server757 hostname matches its FTPS certificate.
+          server: srv757.hstgr.io
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
