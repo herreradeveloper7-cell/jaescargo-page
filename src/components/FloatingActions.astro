@@ -1,5 +1,5 @@
 ---
-import { ArrowUp, Camera, MessageCircle, Phone, X } from '@lucide/astro';
+import { ArrowUp, Phone, X } from '@lucide/astro';
 
 const whatsappUrl =
 	'https://wa.me/?text=Hola%20JAES%20Cargo%2C%20quiero%20mas%20informacion';
@@ -8,7 +8,7 @@ const instagramUrl = 'https://www.instagram.com/jaescargo/';
 const floatButtonClass =
 	'group/action inline-flex h-[54px] w-[54px] cursor-pointer items-center justify-center rounded-full border border-transparent text-white no-underline shadow-[0_16px_34px_rgba(45,45,45,0.18)] transition-[background,border-color,box-shadow,transform,opacity] duration-[200ms] hover:-translate-y-1 hover:scale-105 hover:shadow-[0_20px_42px_rgba(45,45,45,0.28),0_0_0_5px_rgba(139,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.2)] max-[620px]:h-[50px] max-[620px]:w-[50px]';
 const quickActionClass =
-	`${floatButtonClass} translate-x-2.5 scale-[0.88] opacity-0 group-[.is-open]/floating:translate-x-0 group-[.is-open]/floating:scale-100 group-[.is-open]/floating:opacity-100`;
+	`${floatButtonClass} overflow-hidden border-0 bg-transparent translate-x-2.5 scale-[0.88] opacity-0 group-[.is-open]/floating:translate-x-0 group-[.is-open]/floating:scale-100 group-[.is-open]/floating:opacity-100`;
 const floatingIconClass = 'transition-transform duration-200 group-hover/action:rotate-6 group-hover/action:scale-110';
 ---
 
@@ -30,22 +30,22 @@ const floatingIconClass = 'transition-transform duration-200 group-hover/action:
 		data-quick-actions
 	>
 		<a
-			class={`${quickActionClass} border-primary/20 bg-primary delay-[40ms]`}
+			class={`${quickActionClass} delay-[40ms]`}
 			href={whatsappUrl}
 			target="_blank"
 			rel="noreferrer"
 			aria-label="Contactar por WhatsApp"
 		>
-			<MessageCircle class={floatingIconClass} size={22} stroke-width={2.4} aria-hidden="true" />
+			<img src="/images/whatsapp.svg" class="block h-full w-full object-contain" width="54" height="54" alt="" aria-hidden="true" />
 		</a>
 		<a
-			class={`${quickActionClass} border-secondary/20 bg-secondary delay-[80ms]`}
+			class={`${quickActionClass} delay-[80ms]`}
 			href={instagramUrl}
 			target="_blank"
 			rel="noreferrer"
 			aria-label="Abrir Instagram"
 		>
-			<Camera class={floatingIconClass} size={22} stroke-width={2.4} aria-hidden="true" />
+			<img src="/images/instagram.svg" class="block h-full w-full object-contain" width="54" height="54" alt="" aria-hidden="true" />
 		</a>
 	</div>
 
