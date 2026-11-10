@@ -34,26 +34,6 @@ jobs:
       - name: Build website
         run: pnpm run build
 
-      - name: Inspect hosting directories
-        env:
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          python - <<'PY'
-          import ftplib, ssl, os
-          ftp = ftplib.FTP_TLS(context=ssl.create_default_context(), timeout=30)
-          ftp.connect('srv757.hstgr.io', 21)
-          ftp.login(os.environ['FTP_USERNAME'], os.environ['FTP_PASSWORD'])
-          ftp.prot_p()
-          for path in ['/', '/domains', '/domains/jaescargo.com', '/public_html']:
-              try:
-                  ftp.cwd(path)
-                  print(path, ftp.nlst())
-              except ftplib.error_perm as error:
-                  print(path, str(error))
-          ftp.quit()
-          PY
-
       - name: Publish dist to Hostinger
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
@@ -65,5 +45,5 @@ jobs:
           port: 21
           security: strict
           local-dir: ./dist/
-          server-dir: public_html/
+          server-dir: /domains/jaescargo.com/public_html/
           dangerous-clean-slate: false
